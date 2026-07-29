@@ -1,5 +1,5 @@
 /**
- * marginalia — els blocs `:::` propis del quadern (plugin mdast de Sätteri).
+ * blocs — els blocs `:::` propis del quadern (plugin mdast de Sätteri).
  *
  * Sätteri ja ha parsejat `:::nom` en nodes `containerDirective` (cal
  * `features.directive`); aquí només se'ls dona l'element i la classe que
@@ -23,8 +23,8 @@ const BLOCS = {
 
 const NOMS = Object.keys(BLOCS).join(", ");
 
-export const plugiMarginalia = defineMdastPlugin({
-  name: "marginalia",
+export const plugiBlocs = defineMdastPlugin({
+  name: "blocs",
 
   containerDirective(node, ctx) {
     const bloc = BLOCS[node.name];

@@ -1,4 +1,4 @@
-# Marginalia
+# Blog de Víctor Martín
 
 > Quadern mensual de tecnologia de Víctor Martín Castilla.
 > **[blog.victormartinc.com](https://blog.victormartinc.com)**

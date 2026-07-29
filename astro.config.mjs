@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
-import { plugiMarginalia } from "./src/plugins/marginalia.mjs";
+import { plugiBlocs } from "./src/plugins/blocs.mjs";
 import { plugiEnvolts, plugiBarraCodi } from "./src/plugins/envolts.mjs";
 
 // https://astro.build/config
@@ -37,7 +37,7 @@ export default defineConfig({
         // En una revista que presumeix de composició, «"» no és acceptable.
         smartPunctuation: true,
       },
-      mdastPlugins: [plugiMarginalia],
+      mdastPlugins: [plugiBlocs],
       // L'ordre importa: plugiBarraCodi necessita l'embolcall que crea
       // plugiEnvolts, i cada plugin és una passada pròpia sobre l'arbre.
       hastPlugins: [plugiEnvolts, plugiBarraCodi],

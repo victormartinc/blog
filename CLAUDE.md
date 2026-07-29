@@ -1,4 +1,4 @@
-# Marginalia — instruccions per a Claude
+# Blog de Víctor Martín — instruccions per a Claude
 
 Blog personal de tecnologia. Astro + Markdown, sortida estàtica, un número al
 mes. La visió general és al [README.md](README.md); aquí hi ha el que cal
@@ -19,10 +19,14 @@ detecta els errors de `getStaticPaths`, que només surten al build.
 ## La metàfora, i per què importa
 
 El blog es presenta com una **revista mensual**. Cada article és un *número*.
-Això no és només copy: condiciona components (`Masthead`, `Colofo`,
-`SegellNumero`), el vocabulari de la interfície (*número*, *hemeroteca*) i les
-decisions de disseny. Si afegeixes alguna cosa, que hi encaixi — un element
-que sembli d'un SaaS desentona immediatament.
+Això no és només copy: condiciona components (`Segell`, `Portada`, `Colofo`),
+el vocabulari de la interfície (*número*, *hemeroteca*) i les decisions de
+disseny. Si afegeixes alguna cosa, que hi encaixi — un element que sembli
+d'un SaaS desentona immediatament.
+
+El nom públic és simplement **Víctor Martín**, amb el lema fent de subtítol.
+Viu a la clau `lloc.nom` de `src/i18n/ui.ts` i enlloc més: la capçalera, el
+`<title>`, l'OG i els tres feeds el llegeixen d'allà.
 
 El sistema visual és germà del portfolio (`C:\Projects\personal\portfolio`):
 paper càlid, un sol accent de tinta blava, gra de paper, garabat sota els
@@ -57,7 +61,7 @@ s'ignora. Corol·lari: canviar la data d'un article renumera els posteriors.
 
 A més del Markdown de sempre (amb GFM: taules, notes al peu, ratllat) i de la
 puntuació tipogràfica automàtica (`"` → `«»`, `---` → `—`), hi ha quatre
-blocs, implementats a `src/plugins/marginalia.mjs`:
+blocs, implementats a `src/plugins/blocs.mjs`:
 
 ```markdown
 :::marge
@@ -78,7 +82,8 @@ Igual que `nota`, però amb l'accent d'advertència.
 :::
 ```
 
-Les notes al marge són l'element que dona nom al blog. Fes-les servir.
+Les notes al marge són l'element que distingeix aquest disseny de qualsevol
+plantilla. Fes-les servir.
 
 ## El pipeline de Markdown
 
@@ -104,6 +109,11 @@ Tres coses que costen una tarda si no es saben:
 - **El contingut renderitzat es cacheja a `.astro/`.** Si canvies un plugin i
   el build torna a produir l'HTML antic, no és que el plugin no funcioni:
   és la cache. `rm -rf .astro dist` i torna-hi.
+
+  Compte: si esborres `.astro/` **amb el servidor de desenvolupament en
+  marxa**, el servidor es queda amb el magatzem de contingut buit i serveix
+  una portada sense cap número fins que el reiniciïs. No és cap error del
+  codi. Atura'l abans, o reinicia'l després.
 
 ## Coses que costen de descobrir sol
 

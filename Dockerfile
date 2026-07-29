@@ -1,4 +1,4 @@
-# Marginalia — imatge de producció.
+# Blog de Víctor Martín — imatge de producció.
 #
 # Dues etapes: Node compila l'Astro a HTML estàtic, nginx el serveix. La
 # imatge final NO porta Node ni node_modules; és el mateix patró d'nginx

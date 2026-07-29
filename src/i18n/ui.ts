@@ -20,7 +20,7 @@ export const LLENGUA_INFO: Record<Llengua, { curt: string; nom: string; bcp47: s
 };
 
 const ca = {
-  "lloc.nom": "Marginalia",
+  "lloc.nom": "Víctor Martín",
   "lloc.lema": "Quadern mensual de tecnologia",
   "lloc.descripcio":
     "Notes al marge sobre programari, sistemes i IA aplicada. Un número al mes, escrit per Víctor Martín Castilla des de Manresa.",
@@ -67,7 +67,7 @@ const ca = {
 
   "colofo.lema": "Les coses importants es pensen dues vegades.",
   "colofo.text":
-    "Marginalia es compon en Fraunces, Source Serif 4 i IBM Plex Mono. Generat com a HTML estàtic amb Astro i servit des d'un VPS propi, sense rastrejadors de tercers. El codi és a {codi}.",
+    "Aquest quadern es compon en Fraunces, Source Serif 4 i IBM Plex Mono. Generat com a HTML estàtic amb Astro i servit des d'un VPS propi, sense rastrejadors de tercers. El codi és a {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Enllaços",
   "colofo.portfolio": "Portfolio i CV",
@@ -83,7 +83,7 @@ const ca = {
 } as const;
 
 const es: Record<keyof typeof ca, string> = {
-  "lloc.nom": "Marginalia",
+  "lloc.nom": "Víctor Martín",
   "lloc.lema": "Cuaderno mensual de tecnología",
   "lloc.descripcio":
     "Notas al margen sobre software, sistemas e IA aplicada. Un número al mes, escrito por Víctor Martín Castilla desde Manresa.",
@@ -130,7 +130,7 @@ const es: Record<keyof typeof ca, string> = {
 
   "colofo.lema": "Las cosas importantes se piensan dos veces.",
   "colofo.text":
-    "Marginalia se compone en Fraunces, Source Serif 4 e IBM Plex Mono. Generado como HTML estático con Astro y servido desde un VPS propio, sin rastreadores de terceros. El código está en {codi}.",
+    "Este cuaderno se compone en Fraunces, Source Serif 4 e IBM Plex Mono. Generado como HTML estático con Astro y servido desde un VPS propio, sin rastreadores de terceros. El código está en {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Enlaces",
   "colofo.portfolio": "Portfolio y CV",
@@ -146,7 +146,7 @@ const es: Record<keyof typeof ca, string> = {
 };
 
 const en: Record<keyof typeof ca, string> = {
-  "lloc.nom": "Marginalia",
+  "lloc.nom": "Víctor Martín",
   "lloc.lema": "A monthly notebook on technology",
   "lloc.descripcio":
     "Notes in the margin on software, systems and applied AI. One issue a month, written by Víctor Martín Castilla from Manresa.",
@@ -193,7 +193,7 @@ const en: Record<keyof typeof ca, string> = {
 
   "colofo.lema": "The things that matter get thought through twice.",
   "colofo.text":
-    "Marginalia is set in Fraunces, Source Serif 4 and IBM Plex Mono. Built as static HTML with Astro and served from a self-hosted VPS, with no third-party trackers. The source lives on {codi}.",
+    "This notebook is set in Fraunces, Source Serif 4 and IBM Plex Mono. Built as static HTML with Astro and served from a self-hosted VPS, with no third-party trackers. The source lives on {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Links",
   "colofo.portfolio": "Portfolio & CV",

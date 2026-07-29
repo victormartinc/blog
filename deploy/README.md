@@ -1,4 +1,4 @@
-# Desplegament — Marginalia (blog.victormartinc.com)
+# Desplegament — blog.victormartinc.com
 
 Patró estàndard del VPS `tfg-victor-2026` des del reset del 23-07-2026:
 **Caddy** fa de reverse-proxy i gestiona el TLS, i cada web és un contenidor
