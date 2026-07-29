@@ -780,10 +780,15 @@ a { color: inherit; }
    mateix dins d'una capçalera centrada. */
 .numero-capcal .segell { margin-inline: auto; }
 
+/* Frontera entre el titular i el text: aquí s'acaba la capçalera.
+   Va un filet de diari i NO el garabat. El garabat funciona enganxat sota
+   d'un text (els títols de secció del portfolio, el lema del colofó); solt
+   enmig d'un espai buit no sembla un adorn, sembla brutícia. */
 .numero-filet {
-  margin: clamp(30px, 4vw, 44px) 0 0;
-  background: var(--squiggle) no-repeat center / 92px 11px;
-  height: 11px;
+  height: 0;
+  margin: clamp(30px, 4vw, 42px) 0 clamp(26px, 3.5vw, 36px);
+  border: 0;
+  border-top: 1px solid var(--border-fort);
 }
 
 /* Sumari plegable — el que a una revista és l'índex del número */
