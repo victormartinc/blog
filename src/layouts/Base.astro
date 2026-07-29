@@ -1,0 +1,145 @@
+---
+import "../styles/global.css";
+import Capcalera from "../components/Capcalera.astro";
+import Colofo from "../components/Colofo.astro";
+import { LLENGUA_INFO, LLENGUES, traductor, type Llengua } from "../i18n/ui";
+import { urlPortada } from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+  titol: string;
+  descripcio: string;
+  /** Ruta absoluta d'aquesta pàgina, amb barra final. */
+  ruta: string;
+  /**
+   * On viu aquesta mateixa pàgina a les altres llengües. Les que hi faltin
+   * es resolen a la portada de la seva llengua i el selector les marca com
+   * a absents, però NO es declaren com a `hreflang`: seria mentir.
+   */
+  alternatives?: Partial<Record<Llengua, string>>;
+  tipus?: "website" | "article";
+  publicat?: Date;
+  modificat?: Date;
+  /** Article: amaga el colofó gran i deixa el peu del número. */
+  ampleComplet?: boolean;
+}
+
+const {
+  llengua,
+  titol,
+  descripcio,
+  ruta,
+  alternatives = {},
+  tipus = "website",
+  publicat,
+  modificat,
+} = Astro.props;
+
+const t = traductor(llengua);
+const base = Astro.site ?? new URL("https://blog.victormartinc.com");
+const canonical = new URL(ruta, base).href;
+
+/* Sempre hi ha almenys la llengua actual */
+const alternes: Partial<Record<Llengua, string>> = { [llengua]: ruta, ...alternatives };
+const titolComplet = titol === t("lloc.nom") ? `${titol} — ${t("lloc.lema")}` : `${titol} · ${t("lloc.nom")}`;
+---
+
+<!doctype html>
+<html lang={LLENGUA_INFO[llengua].bcp47} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titolComplet}</title>
+    <meta name="description" content={descripcio} />
+    <meta name="author" content="Víctor Martín Castilla" />
+    <link rel="canonical" href={canonical} />
+
+    {
+      LLENGUES.filter((l) => alternes[l]).map((l) => (
+        <link rel="alternate" hreflang={LLENGUA_INFO[l].bcp47} href={new URL(alternes[l]!, base).href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(alternes.ca ?? urlPortada("ca"), base).href} />
+
+    <meta property="og:type" content={tipus} />
+    <meta property="og:site_name" content={t("lloc.nom")} />
+    <meta property="og:locale" content={LLENGUA_INFO[llengua].bcp47.replace("-", "_")} />
+    <meta property="og:title" content={titol} />
+    <meta property="og:description" content={descripcio} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    {publicat && <meta property="article:published_time" content={publicat.toISOString()} />}
+    {modificat && <meta property="article:modified_time" content={modificat.toISOString()} />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {
+      LLENGUES.map((l) => (
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${t("lloc.nom")} (${LLENGUA_INFO[l].nom})`}
+          href={l === "ca" ? "/rss.xml" : `/${l}/rss.xml`}
+        />
+      ))
+    }
+
+    {/* Les dues fonts que pinten el primer text visible. La resta arriba per
+        @font-face quan toca; precarregar-les totes empitjora el LCP. */}
+    <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    {/* Síncron i abans de pintar res: si això anés diferit, carregar en fosc
+        faria un flaix blanc. És l'única raó per posar-hi un script inline. */}
+    <script is:inline>
+      (function () {
+        document.documentElement.classList.add("js");
+        try {
+          var t = localStorage.getItem("tema");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+            return;
+          }
+        } catch (e) {
+          /* mode privat */
+        }
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#principal">{t("a11y.saltar")}</a>
+
+    <Capcalera llengua={llengua} alternatives={alternes} />
+
+    <main id="principal">
+      <slot />
+    </main>
+
+    <Colofo llengua={llengua} />
+
+    <script>
+      /* Tema clar/fosc. Només es desa la tria explícita: mentre no n'hi hagi
+         cap, cada visita torna a consultar la preferència del sistema. */
+      const boto = document.querySelector<HTMLButtonElement>(".boto-tema");
+      boto?.addEventListener("click", () => {
+        const actual = document.documentElement.getAttribute("data-theme");
+        const seguent = actual === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", seguent);
+        try {
+          localStorage.setItem("tema", seguent);
+        } catch (e) {
+          /* mode privat */
+        }
+      });
+    </script>
+  </body>
+</html>

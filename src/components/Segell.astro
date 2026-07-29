@@ -1,0 +1,27 @@
+---
+import { traductor, type Llengua } from "../i18n/ui";
+
+/**
+ * Segell de número — el tampó de goma que marca l'exemplar. Amb `data`
+ * porta el mes a sota; sense, només la xifra (el 404 se'n serveix així).
+ */
+interface Props {
+  llengua: Llengua;
+  xifra: number | string;
+  data?: string;
+  petit?: boolean;
+  /** Text de l'anella. Per defecte, «núm.». */
+  etiqueta?: string;
+}
+
+const { llengua, xifra, data, petit = false, etiqueta } = Astro.props;
+const t = traductor(llengua);
+const marca = etiqueta ?? t("num.abrev");
+const numero = typeof xifra === "number" ? String(xifra).padStart(2, "0") : xifra;
+---
+
+<div class:list={["segell", { "segell-petit": petit }]} aria-hidden="true">
+  <span class="segell-etiqueta">{marca}</span>
+  <span class="segell-xifra">{numero}</span>
+  {data && <span class="segell-data">{data}</span>}
+</div>

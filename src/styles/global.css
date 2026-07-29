@@ -1,0 +1,1404 @@
+/* ==========================================================================
+   Marginalia — sistema de disseny
+   ==========================================================================
+
+   Germà del "Tinta i terra" del portfolio: mateixes variables de color,
+   mateixes tres tipografies, mateix gra de paper. El que hi afegeix és el
+   vocabulari de revista — capçalera de diari, segell de número, capitular,
+   notes al marge i colofó.
+
+   Ordre del fitxer:
+     1. Fonts        6. Portada          11. Blocs :::
+     2. Tokens       7. Hemeroteca       12. Peu de número
+     3. Base         8. Article          13. Colofó
+     4. Capçalera    9. Prosa            14. Impressió
+     5. Masthead    10. Codi             15. Responsive
+   ========================================================================== */
+
+/* ---------- 1. Fonts auto-hostatjades ------------------------------------
+   Els mateixos woff2 que el portfolio, servits des del propi origen: sense
+   cadena de tercers i amb cache d'un any. Subsets latin + latin-ext via
+   unicode-range, perquè un text sense accents rars no baixi el segon fitxer.
+   -------------------------------------------------------------------------- */
+
+/* Fraunces — variable (wght 500-700) */
+@font-face {
+  font-family: "Fraunces"; font-style: normal; font-weight: 500 700; font-display: swap;
+  src: url("/fonts/fraunces-var-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Fraunces"; font-style: normal; font-weight: 500 700; font-display: swap;
+  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces"; font-style: italic; font-weight: 500 600; font-display: swap;
+  src: url("/fonts/fraunces-var-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Fraunces"; font-style: italic; font-weight: 500 600; font-display: swap;
+  src: url("/fonts/fraunces-var-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Source Serif 4 — variable (wght 400-600) */
+@font-face {
+  font-family: "Source Serif 4"; font-style: normal; font-weight: 400 600; font-display: swap;
+  src: url("/fonts/source-serif-4-var-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Source Serif 4"; font-style: normal; font-weight: 400 600; font-display: swap;
+  src: url("/fonts/source-serif-4-var-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Source Serif 4"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/source-serif-4-var-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Source Serif 4"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/source-serif-4-var-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* IBM Plex Mono — estàtiques 400/500 + itàliques */
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/plex-mono-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/plex-mono-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/plex-mono-500-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/plex-mono-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/plex-mono-400-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/plex-mono-400-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 500; font-display: swap;
+  src: url("/fonts/plex-mono-500-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 500; font-display: swap;
+  src: url("/fonts/plex-mono-500-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- 2. Tokens ---------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-head: "Fraunces", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+
+  --container: 1120px;
+  --header-h: 62px;
+
+  /* Amplada de la columna de text i del marge on cauen les notes. Tot el
+     sistema de l'article es deriva d'aquestes dues mides. */
+  --mesura: 34rem;
+  --marge: 15rem;
+  --marge-gap: 2.5rem;
+
+  --ease: cubic-bezier(.22, .8, .3, 1);
+
+  /* gra de paper (feTurbulence inline, compartit pels dos temes) */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f4ec;
+  --bg-alt: #ebe9dc;
+  --surface: #fbfaf3;
+  --border: rgba(38, 38, 32, .16);
+  --border-fort: rgba(38, 38, 32, .34);
+  --text: #262620;
+  --text-soft: #5b584a;
+  --text-faint: #6b675a;
+  --accent: #1f5290;          /* blau de tinta d'estilogràfica — 7.1:1 sobre bg */
+  --accent-text: #1f5290;
+  --on-accent: #ffffff;       /* 7.9:1 sobre l'accent */
+  --chip-bg: #e6ebf3;
+  --chip-border: rgba(31, 82, 144, .32);
+  --avis: #8a4b12;            /* terra cuita per als blocs d'advertència */
+  --avis-bg: #f6ecdf;
+  --shadow: 0 10px 26px rgba(38, 38, 32, .13);
+  --grain-opacity: .035;
+  --sun: radial-gradient(720px 560px at 85% -5%, rgba(31, 82, 144, .05), transparent 70%);
+  --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='10' viewBox='0 0 78 10'%3E%3Cpath d='M2 7 Q10 2 19 6.5 T38 6 T57 7 T76 5.5' fill='none' stroke='%231F5290' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #191b16;
+  --bg-alt: #1e211a;
+  --surface: #242820;
+  --border: rgba(231, 229, 216, .14);
+  --border-fort: rgba(231, 229, 216, .3);
+  --text: #e7e5d8;
+  --text-soft: #b0ad9b;
+  --text-faint: #96927f;
+  --accent: #8fb4e6;          /* blau de tinta a mitja llum — 7.9:1 sobre bg */
+  --accent-text: #8fb4e6;
+  --on-accent: #131c29;       /* tinta sobre l'accent — 7.8:1 */
+  --chip-bg: #242b36;
+  --chip-border: rgba(143, 180, 230, .32);
+  --avis: #dda15e;
+  --avis-bg: #2b2519;
+  --shadow: 0 10px 26px rgba(0, 0, 0, .35);
+  --grain-opacity: .05;
+  --sun: radial-gradient(720px 560px at 85% -5%, rgba(143, 180, 230, .06), transparent 70%);
+  --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='10' viewBox='0 0 78 10'%3E%3Cpath d='M2 7 Q10 2 19 6.5 T38 6 T57 7 T76 5.5' fill='none' stroke='%238FB4E6' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ---------- 3. Base ------------------------------------------------------ */
+
+/* Transició nativa entre pàgines: el navegador encadena un fos entre el
+   document que marxa i el que arriba, sense una línia de JavaScript. Els
+   que no ho suporten, simplement no la fan. */
+@view-transition { navigation: auto; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.72;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+
+/* gra de paper per sobre de tot, imperceptible però tàctil */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: var(--grain-opacity);
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+::selection { background: var(--chip-bg); }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  text-decoration: none;
+  transition: top .2s var(--ease);
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.visualment-ocult {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Botó d'impremta, heretat del portfolio: es prem físicament */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: .86rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .12s var(--ease), box-shadow .12s var(--ease),
+              border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 3px 3px 0 var(--text);
+}
+.btn-primary:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--text); }
+.btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--text); }
+
+.btn-ghost {
+  border: 1.5px solid currentColor;
+  background: transparent;
+  color: var(--text);
+}
+.btn-ghost:hover { color: var(--accent); background: var(--chip-bg); }
+.btn-ghost:active { transform: translate(1px, 1px); }
+
+/* ---------- 4. Capçalera fixa -------------------------------------------- */
+
+.capcalera {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  /* doble filet de diari: la segona línia surt de l'ombra desplaçada */
+  box-shadow: 0 3px 0 -2px var(--border);
+  transition: background .3s var(--ease);
+}
+
+.capcalera-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.16rem;
+  letter-spacing: -.01em;
+}
+.marca-punt {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+  transform: translateY(-2px);
+}
+.marca-sub {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: .72rem;
+  color: var(--text-faint);
+  letter-spacing: .02em;
+}
+
+.capcalera-accions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.enllac-mono {
+  padding: 7px 10px;
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  text-transform: lowercase;
+  letter-spacing: .02em;
+  color: var(--text-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s var(--ease), background .2s var(--ease);
+}
+.enllac-mono:hover { color: var(--text); background: var(--bg-alt); }
+
+.selector-llengua {
+  display: flex;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+}
+.llengua-btn {
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color .2s var(--ease), background .2s var(--ease);
+}
+.llengua-btn:hover { color: var(--text); }
+.llengua-btn[aria-current="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+/* Una llengua on aquest número no existeix: hi porta, però a la portada */
+.llengua-btn.absent { opacity: .45; }
+
+.boto-icona {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-soft);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.boto-icona:hover { color: var(--accent); border-color: var(--accent); }
+.boto-tema:hover { transform: rotate(12deg); }
+:root[data-theme="dark"] .icona-lluna { display: none; }
+:root[data-theme="light"] .icona-sol { display: none; }
+
+/* ---------- 5. Masthead de portada --------------------------------------- */
+
+.masthead {
+  position: relative;
+  padding: clamp(48px, 8vw, 84px) 0 0;
+  text-align: center;
+  overflow: hidden;
+}
+.masthead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--sun);
+}
+
+.masthead-inner { position: relative; }
+
+/* Filet triple de capçalera de diari: gruixut, prim, gruixut */
+.filet-doble {
+  border: 0;
+  height: 6px;
+  margin: 0;
+  border-top: 2px solid var(--text);
+  border-bottom: 1px solid var(--text);
+  opacity: .82;
+}
+.filet-simple {
+  border: 0;
+  height: 0;
+  margin: 0;
+  border-top: 1px solid var(--border-fort);
+}
+
+.masthead-titol {
+  margin: clamp(20px, 3vw, 30px) 0 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 11vw, 5.6rem);
+  line-height: .95;
+  letter-spacing: clamp(.02em, .6vw, .09em);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.masthead-lema {
+  margin: 14px auto 0;
+  max-width: 34ch;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1rem, 2.4vw, 1.22rem);
+  color: var(--text-soft);
+}
+
+/* Línia de bandera: el que a una revista de paper diu any, número i preu */
+.bandera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  margin: clamp(22px, 3vw, 32px) 0 0;
+  padding: 11px 0;
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: lowercase;
+  color: var(--text-faint);
+}
+.bandera a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.bandera a:hover { color: var(--accent-text); border-color: currentColor; }
+.bandera-sep { opacity: .4; }
+
+/* ---------- 6. Portada: últim número ------------------------------------- */
+
+.seccio { padding: clamp(52px, 7vw, 84px) 0; }
+
+.seccio-titol {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 30px;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: lowercase;
+  color: var(--accent-text);
+}
+.seccio-titol::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* La portada del número destacat: dues columnes en escriptori */
+.destacat-num {
+  display: grid;
+  grid-template-columns: minmax(0, 7rem) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 44px);
+  align-items: start;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform .25s var(--ease), border-color .25s var(--ease);
+}
+.destacat-num:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+.destacat-titol {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.15;
+  letter-spacing: -.012em;
+}
+.destacat-subtitol {
+  margin: 10px 0 0;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--text-soft);
+}
+.destacat-entradeta {
+  margin: 16px 0 0;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+}
+.destacat-peu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  color: var(--text-faint);
+}
+.destacat-cta {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+.destacat-num:hover .destacat-cta .fletxa { transform: translateX(4px); }
+.fletxa { display: inline-block; transition: transform .2s var(--ease); }
+
+/* Segell de número: goma de segellar, lleugerament tort */
+.segell {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  width: 7rem;
+  height: 7rem;
+  padding: 6px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  text-align: center;
+  transform: rotate(-6deg);
+  transition: transform .3s var(--ease);
+}
+.destacat-num:hover .segell { transform: rotate(0deg); }
+.segell-etiqueta {
+  font-size: .6rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.segell-xifra {
+  font-family: var(--font-head);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.segell-data {
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.segell-petit {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-width: 1.5px;
+  transform: rotate(-4deg);
+}
+.segell-petit .segell-xifra { font-size: 1.28rem; }
+.segell-petit .segell-etiqueta { font-size: .48rem; letter-spacing: .12em; }
+
+/* ---------- 7. Hemeroteca ------------------------------------------------ */
+
+.any-bloc + .any-bloc { margin-top: 40px; }
+
+.any-titol {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 6px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.32rem;
+  color: var(--text-faint);
+}
+.any-titol::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.hemeroteca {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fila-num {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 6px 20px;
+  padding: 18px 10px 18px 6px;
+  border-bottom: 1px dashed var(--border);
+  text-decoration: none;
+  border-radius: var(--radius-s);
+  transition: background .18s var(--ease), padding-left .18s var(--ease);
+}
+.fila-num:hover {
+  background: var(--bg-alt);
+  padding-left: 14px;
+}
+
+.fila-numero {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .06em;
+  color: var(--accent-text);
+  white-space: nowrap;
+}
+
+.fila-titol {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+.fila-num:hover .fila-titol { color: var(--accent-text); }
+
+.fila-desc {
+  margin: 4px 0 0;
+  color: var(--text-soft);
+  font-size: .93rem;
+}
+
+.fila-data {
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ---------- Etiquetes ---------------------------------------------------- */
+
+.etiquetes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 4px 11px;
+  border: 1px solid var(--chip-border);
+  border-radius: 4px;
+  background: var(--chip-bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  text-decoration: none;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.etiqueta::before { content: "#"; opacity: .5; margin-right: 1px; }
+.etiqueta:hover { border-color: var(--accent); color: var(--accent-text); }
+
+.etiqueta-compte {
+  margin-left: 5px;
+  font-size: .9em;
+  opacity: .6;
+}
+
+.buit {
+  margin: 0;
+  padding: 40px 0;
+  color: var(--text-faint);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ---------- 8. Article --------------------------------------------------- */
+
+/* Barra de progrés: un filet de tinta que s'omple mentre es llegeix */
+.progres {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+/* Només padding-top: el dret el posa `.columna` a partir de 1240px i una
+   drecera `padding: X 0 0` el tornaria a zero. */
+.numero-capcal {
+  padding-top: clamp(34px, 5vw, 56px);
+  text-align: center;
+}
+
+.numero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 14px;
+  margin: 16px 0 0;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--text-faint);
+}
+
+.numero-titol {
+  margin: 18px auto 0;
+  max-width: 20ch;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.4vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -.018em;
+}
+
+.numero-subtitol {
+  margin: 14px auto 0;
+  max-width: 46ch;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+  color: var(--text-soft);
+}
+
+.numero-etiquetes {
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* El segell té amplada fixa: `place-items` centra el seu contingut, no ell
+   mateix dins d'una capçalera centrada. */
+.numero-capcal .segell { margin-inline: auto; }
+
+.numero-filet {
+  margin: clamp(30px, 4vw, 44px) 0 0;
+  background: var(--squiggle) no-repeat center / 92px 11px;
+  height: 11px;
+}
+
+/* Sumari plegable — el que a una revista és l'índex del número */
+.sumari {
+  margin: 0 0 clamp(30px, 4vw, 44px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+.sumari > summary {
+  padding: 12px 18px;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: lowercase;
+  color: var(--text-soft);
+  cursor: pointer;
+  list-style: none;
+}
+.sumari > summary::-webkit-details-marker { display: none; }
+.sumari > summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 10px;
+  color: var(--accent-text);
+  transition: transform .2s var(--ease);
+}
+.sumari[open] > summary::before { transform: rotate(90deg); }
+.sumari ol {
+  margin: 0;
+  padding: 4px 18px 16px 20px;
+  list-style: none;
+  counter-reset: sumari;
+}
+.sumari li { counter-increment: sumari; }
+.sumari li.nivell-3 { padding-left: 20px; }
+.sumari a {
+  display: block;
+  padding: 5px 0;
+  font-size: .93rem;
+  color: var(--text-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.sumari a:hover { color: var(--accent-text); }
+
+/* ---------- 9. Prosa ----------------------------------------------------- */
+
+/* Eix únic de l'article.
+   Capçalera, sumari, text i peu comparteixen aquest mateix quadre. Si cada
+   peça se centrés pel seu compte, la capçalera quedaria centrada sobre el
+   contenidor i el text sobre la seva columna: dos eixos que no coincideixen
+   i que es noten de seguida. A partir de 1240px el quadre s'eixampla i
+   reserva el marge dret amb padding, on hi floten les notes. */
+.columna {
+  width: min(var(--mesura), 100%);
+  margin-inline: auto;
+}
+
+.prosa { counter-reset: nota-marge; }
+
+.prosa > * { margin-block: 0 1.35em; }
+.prosa > :last-child { margin-bottom: 0; }
+
+.prosa p { color: var(--text); }
+
+/* Capitular: només al primer paràgraf, i només si hi cap bé */
+.prosa > p:first-of-type::first-letter {
+  float: left;
+  margin: .06em .1em 0 0;
+  padding-right: .04em;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 3.7em;
+  line-height: .8;
+  color: var(--accent-text);
+}
+
+.prosa h2, .prosa h3, .prosa h4 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  letter-spacing: -.012em;
+  line-height: 1.25;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+.prosa h2 { margin-top: 2.2em; font-size: 1.62rem; }
+.prosa h3 { margin-top: 1.9em; font-size: 1.24rem; }
+.prosa h4 { margin-top: 1.7em; font-size: 1.06rem; font-style: italic; }
+
+/* L'àncora surt en passar-hi per sobre, no abans */
+.prosa :is(h2, h3, h4) > a.ancora {
+  margin-left: .4em;
+  font-family: var(--font-mono);
+  font-size: .62em;
+  font-weight: 400;
+  color: var(--text-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity .18s var(--ease);
+}
+.prosa :is(h2, h3, h4):hover > a.ancora,
+.prosa :is(h2, h3, h4) > a.ancora:focus-visible { opacity: 1; }
+
+.prosa a:not(.ancora) {
+  color: var(--accent-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--chip-border);
+  transition: border-color .18s var(--ease), background .18s var(--ease);
+}
+.prosa a:not(.ancora):hover {
+  border-color: var(--accent);
+  background: var(--chip-bg);
+}
+
+.prosa strong { font-weight: 600; }
+
+.prosa ul, .prosa ol { padding-left: 1.3em; }
+.prosa li { margin-bottom: .5em; }
+.prosa li::marker { color: var(--accent-text); }
+.prosa ul li::marker { content: "— "; }
+
+.prosa hr {
+  border: 0;
+  height: 11px;
+  margin: 2.6em auto;
+  width: 78px;
+  background: var(--squiggle) no-repeat center / 78px 10px;
+}
+
+.prosa img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow);
+}
+
+.prosa figure { margin-inline: 0; }
+.prosa figcaption {
+  margin-top: 9px;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: .74rem;
+  color: var(--text-faint);
+  text-align: right;
+}
+
+/* Cita normal de Markdown (`>`): filet a l'esquerra, sòbria */
+.prosa > blockquote:not(.destacat) {
+  margin-left: 0;
+  padding: 2px 0 2px 22px;
+  border-left: 2px solid var(--chip-border);
+  color: var(--text-soft);
+  font-style: italic;
+}
+.prosa > blockquote:not(.destacat) p:last-child { margin-bottom: 0; }
+
+/* Taules: filets de diari, sense caixes */
+.prosa .taula-envolt {
+  overflow-x: auto;
+  margin-bottom: 1.6em;
+}
+.prosa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .93rem;
+}
+.prosa th, .prosa td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.prosa th {
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: lowercase;
+  color: var(--text-soft);
+  border-bottom: 1.5px solid var(--border-fort);
+  white-space: nowrap;
+}
+.prosa tbody tr:last-child td { border-bottom: 0; }
+
+/* Notes al peu de GFM */
+.prosa .footnotes {
+  margin-top: 3em;
+  padding-top: 1.4em;
+  border-top: 1px solid var(--border);
+  font-size: .92rem;
+  color: var(--text-soft);
+}
+.prosa .footnotes h2 {
+  margin: 0 0 .8em;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: lowercase;
+  color: var(--text-faint);
+}
+.prosa .footnotes ol { padding-left: 1.2em; }
+.prosa [data-footnote-ref] {
+  padding: 0 1px;
+  font-family: var(--font-mono);
+  font-size: .72em;
+  border-bottom: 0;
+}
+
+/* ---------- 10. Codi ----------------------------------------------------- */
+
+.prosa :not(pre) > code {
+  padding: .12em .38em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-alt);
+  font-family: var(--font-mono);
+  font-size: .86em;
+  word-break: break-word;
+}
+
+.bloc-codi {
+  position: relative;
+  margin-bottom: 1.6em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* Barra superior amb el llenguatge, com el peu d'una il·lustració */
+.bloc-codi-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 12px 7px 14px;
+  border-bottom: 1px dashed var(--border);
+  background: var(--bg-alt);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: lowercase;
+  color: var(--text-faint);
+}
+
+.copia-btn {
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text-soft);
+  font: inherit;
+  cursor: pointer;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.copia-btn:hover { color: var(--accent-text); border-color: var(--accent); }
+.copia-btn[data-fet="si"] { color: var(--accent-text); border-color: var(--accent); }
+
+.bloc-codi pre.astro-code {
+  margin: 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  background: transparent;
+  font-size: .85rem;
+  line-height: 1.65;
+  border-radius: 0;
+}
+.bloc-codi pre.astro-code code { font-family: var(--font-mono); }
+
+/* Shiki va amb defaultColor:false → cada span porta les dues variables i
+   el tema actiu decideix quina es fa servir. Sense això el codi surt negre.
+   El fons NO es toca: --shiki-*-bg és blanc pur / negre pur i trencaria el
+   paper. El bloc es queda sobre --surface, com la resta de caixes. */
+:root[data-theme="light"] .astro-code,
+:root[data-theme="light"] .astro-code span {
+  color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+:root[data-theme="dark"] .astro-code,
+:root[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark);
+  font-style: var(--shiki-dark-font-style);
+  font-weight: var(--shiki-dark-font-weight);
+  text-decoration: var(--shiki-dark-text-decoration);
+}
+
+/* ---------- 11. Blocs ::: ------------------------------------------------ */
+
+/* Nota al marge — l'element que dona nom al blog.
+   En pantalles estretes és un bloc sagnat dins del text; a partir de
+   1240px flota al marge dret gràcies al padding de `.columna`. */
+.nota-marge {
+  counter-increment: nota-marge;
+  position: relative;
+  margin: 1.6em 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--chip-border);
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+.nota-marge::before {
+  content: counter(nota-marge);
+  position: absolute;
+  top: -.15em;
+  left: -11px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--chip-border);
+  border-radius: 50%;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  color: var(--accent-text);
+}
+.nota-marge > :last-child { margin-bottom: 0; }
+.nota-marge p { margin-bottom: .6em; }
+
+/* Cita destacada: el que a una revista és el text sobresortint */
+.prosa blockquote.destacat {
+  margin: 2.2em 0;
+  padding: 0 0 0 4px;
+  border: 0;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  line-height: 1.4;
+  color: var(--text);
+  text-indent: -.42em;
+}
+.prosa blockquote.destacat p { margin-bottom: .4em; }
+.prosa blockquote.destacat p:first-child::before { content: "\201C"; color: var(--accent-text); }
+.prosa blockquote.destacat p:last-child { margin-bottom: 0; }
+.prosa blockquote.destacat p:last-child::after { content: "\201D"; color: var(--accent-text); }
+
+/* Caixes d'aclariment i d'advertència */
+.caixa {
+  margin: 1.9em 0;
+  padding: 18px 22px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  font-size: .96rem;
+}
+.caixa > :last-child { margin-bottom: 0; }
+.caixa p { margin-bottom: .8em; }
+.caixa-titol {
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: lowercase;
+  color: var(--accent-text);
+}
+.caixa-avis {
+  border-left-color: var(--avis);
+  background: var(--avis-bg);
+}
+.caixa-avis .caixa-titol { color: var(--avis); }
+
+/* Xarxa de seguretat del plugin: una directiva mal escrita es veu */
+.bloc-desconegut {
+  margin: 1.6em 0;
+  padding: 14px 18px;
+  border: 1px dashed var(--avis);
+  border-radius: var(--radius-m);
+  color: var(--avis);
+}
+.bloc-desconegut::before {
+  content: "bloc «" attr(data-directiva) "» desconegut";
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .08em;
+}
+
+/* ---------- 12. Peu de número -------------------------------------------- */
+
+/* Només margin-top: una drecera `margin: X 0 0` anul·laria el
+   `margin-inline: auto` de `.columna` i el peu quedaria descentrat. */
+.numero-peu {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+
+.firma {
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--text-faint);
+  line-height: 1.8;
+}
+.firma strong {
+  display: block;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--text);
+}
+
+.veins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+.vei {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  text-decoration: none;
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.vei:hover { border-color: var(--accent); transform: translateY(-2px); }
+.vei-etiqueta {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: lowercase;
+  color: var(--text-faint);
+}
+.vei-titol {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+.vei-seguent { text-align: right; }
+
+/* ---------- 13. Colofó (peu de pàgina) ----------------------------------- */
+
+.colofo {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding: 44px 0 40px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.colofo-graella {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.colofo-lema {
+  margin: 0 0 18px;
+  width: fit-content;
+  padding: 0 4px 14px;
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+  line-height: 1.35;
+  background: var(--squiggle) no-repeat left bottom / 78px 10px;
+}
+
+.colofo-text {
+  margin: 0;
+  max-width: 46ch;
+  font-size: .9rem;
+  color: var(--text-soft);
+}
+.colofo-text a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid transparent; }
+.colofo-text a:hover { border-color: currentColor; }
+
+.colofo-llista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+}
+.colofo-llista a {
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color .18s var(--ease);
+}
+.colofo-llista a:hover { color: var(--accent-text); }
+.colofo-llista a::before { content: "→ "; color: var(--accent-text); }
+
+.colofo-copy {
+  margin: 34px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* ---------- 404 ---------------------------------------------------------- */
+
+.error-pagina {
+  padding: clamp(60px, 12vw, 130px) 0;
+  text-align: center;
+}
+.error-pagina .segell { margin: 0 auto 30px; }
+.error-titol {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+}
+.error-text {
+  margin: 16px auto 30px;
+  max-width: 44ch;
+  color: var(--text-soft);
+}
+
+/* ---------- 14. Impressió ------------------------------------------------
+   Una revista s'ha de poder imprimir. Fora capçalera, colofó i cromatisme;
+   les notes al marge tornen al text i els enllaços mostren la seva URL.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  :root { --mesura: 100%; }
+  body::after, .capcalera, .colofo, .progres, .veins, .sumari, .copia-btn { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11.5pt; }
+  .prosa, .numero-peu, .numero-titol { max-width: none; width: auto; }
+  .columna { padding-right: 0 !important; }
+  .nota-marge { float: none !important; width: auto !important; margin: 1.2em 0 !important; }
+  .prosa a:not(.ancora)::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-mono);
+    font-size: .78em;
+    color: #555;
+    word-break: break-all;
+  }
+  .prosa a[href^="#"]::after { content: ""; }
+  .bloc-codi, .caixa, .prosa img { break-inside: avoid; }
+  .prosa h2, .prosa h3 { break-after: avoid; }
+}
+
+/* ---------- 15. Responsive ----------------------------------------------- */
+
+/* A partir d'aquí hi cap el marge dret sencer: les notes hi floten.
+   La columna s'eixampla i reserva el marge amb padding-right, així el
+   conjunt (text + marge) queda centrat i el text no es desplaça. */
+@media (min-width: 1240px) {
+  .columna {
+    width: calc(var(--mesura) + var(--marge) + var(--marge-gap));
+    padding-right: calc(var(--marge) + var(--marge-gap));
+  }
+  .prosa .nota-marge {
+    float: right;
+    clear: right;
+    width: var(--marge);
+    margin: .3em calc(-1 * (var(--marge) + var(--marge-gap))) 1.2em 0;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--chip-border);
+    padding-top: 12px;
+    font-size: .84rem;
+  }
+  .prosa .nota-marge::before {
+    position: static;
+    display: inline-grid;
+    margin-right: 7px;
+    vertical-align: 1px;
+  }
+}
+
+@media (max-width: 860px) {
+  .destacat-num { grid-template-columns: 1fr; }
+  .destacat-num .segell { margin-bottom: 4px; }
+  .colofo-graella { grid-template-columns: 1fr; gap: 28px; }
+  .marca-sub { display: none; }
+}
+
+@media (max-width: 680px) {
+  body { font-size: 16.5px; }
+  .container { padding-inline: 18px; }
+  .fila-num {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 12px;
+  }
+  .fila-numero { grid-column: 1 / -1; }
+  .fila-data { grid-row: 1; grid-column: 2; }
+  .veins { grid-template-columns: 1fr; }
+  .vei-seguent { text-align: left; }
+  .prosa > p:first-of-type::first-letter { font-size: 3.1em; }
+  .capcalera-accions { gap: 6px; }
+  .enllac-portfolio { display: none; }
+}
+
+@media (max-width: 420px) {
+  .selector-llengua { padding: 2px; }
+  .llengua-btn { padding: 4px 6px; font-size: .7rem; }
+}
+
+/* ---------- Moviment reduït ---------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  /* El selector universal no arriba als pseudoelements de la transició de
+     pàgina: s'han de desactivar a part o el fos es continua veient. */
+  ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

@@ -1,0 +1,9 @@
+# Els scripts i configs de deploy s'executen al VPS (Linux). Amb
+# core.autocrlf=true, un clon a Windows els convertiria a CRLF i un shebang
+# amb \r no arrenca al servidor. Es força LF aquí perquè no depengui de la
+# configuració de cada màquina.
+*.sh   text eol=lf
+*.conf text eol=lf
+
+# Les fonts són binàries: cap conversió de finals de línia.
+*.woff2 binary

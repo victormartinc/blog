@@ -1,0 +1,33 @@
+---
+import { render } from "astro:content";
+import NumeroLayout from "../../../layouts/Numero.astro";
+import { LLENGUA_DEFECTE, type Llengua } from "../../../i18n/ui";
+import { carregaNumeros, numerosDe, veins, type Numero } from "../../../lib/posts";
+
+export async function getStaticPaths() {
+  const tots = await carregaNumeros();
+  return tots
+    .filter((n) => n.llengua !== LLENGUA_DEFECTE)
+    .map((numero) => ({
+      params: { lang: numero.llengua, slug: numero.slug },
+      props: { numero },
+    }));
+}
+
+const { numero } = Astro.props as { numero: Numero };
+const llengua: Llengua = numero.llengua;
+const { Content, headings } = await render(numero.entrada);
+
+const delaLlengua = await numerosDe(llengua);
+const { anterior, seguent } = veins(delaLlengua, numero);
+---
+
+<NumeroLayout
+  llengua={llengua}
+  numero={numero}
+  headings={headings}
+  anterior={anterior}
+  seguent={seguent}
+>
+  <Content />
+</NumeroLayout>

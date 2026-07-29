@@ -1,0 +1,30 @@
+---
+import { render } from "astro:content";
+import NumeroLayout from "../../layouts/Numero.astro";
+import { carregaNumeros, numerosDe, veins, type Numero } from "../../lib/posts";
+
+const LLENGUA = "ca" as const;
+
+export async function getStaticPaths() {
+  const tots = await carregaNumeros();
+  return tots
+    .filter((n) => n.llengua === "ca")
+    .map((numero) => ({ params: { slug: numero.slug }, props: { numero } }));
+}
+
+const { numero } = Astro.props as { numero: Numero };
+const { Content, headings } = await render(numero.entrada);
+
+const delaLlengua = await numerosDe(LLENGUA);
+const { anterior, seguent } = veins(delaLlengua, numero);
+---
+
+<NumeroLayout
+  llengua={LLENGUA}
+  numero={numero}
+  headings={headings}
+  anterior={anterior}
+  seguent={seguent}
+>
+  <Content />
+</NumeroLayout>

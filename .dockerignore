@@ -1,0 +1,15 @@
+# El build es fa dins de la imatge: no copiïs mai el node_modules ni el dist
+# de la màquina local (poden portar binaris de Windows i invaliden la cache).
+node_modules
+dist
+.astro
+
+.git
+.gitignore
+.gitattributes
+.claude
+.vscode
+compose.prod.yml
+CLAUDE.md
+README.md
+deploy/README.md

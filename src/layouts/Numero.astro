@@ -1,0 +1,209 @@
+---
+import Base from "./Base.astro";
+import Segell from "../components/Segell.astro";
+import Etiquetes from "../components/Etiquetes.astro";
+import { traductor, type Llengua } from "../i18n/ui";
+import {
+  dataISO,
+  formataData,
+  formataMesAny,
+  urlNumero,
+  type Numero,
+} from "../lib/posts";
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  llengua: Llengua;
+  numero: Numero;
+  headings: MarkdownHeading[];
+  anterior?: Numero;
+  seguent?: Numero;
+}
+
+const { llengua, numero, headings, anterior, seguent } = Astro.props;
+const t = traductor(llengua);
+const { data } = numero.entrada;
+
+/* El sumari només val la pena si l'article té estructura real. Amb dos
+   apartats no orienta ningú i només afegeix soroll a sobre del text. */
+const sumari = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const mostraSumari = sumari.filter((h) => h.depth === 2).length >= 3;
+
+/* Aquest número existeix a aquestes llengües; la resta les resol la
+   capçalera portant a la portada corresponent. */
+const alternatives = Object.fromEntries(
+  numero.traduccions.map((l) => [l, urlNumero(l, numero.slug)]),
+) as Partial<Record<Llengua, string>>;
+
+const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
+---
+
+<Base
+  llengua={llengua}
+  titol={data.title}
+  descripcio={data.description}
+  ruta={numero.url}
+  alternatives={alternatives}
+  tipus="article"
+  publicat={numero.data}
+  modificat={data.updated}
+>
+  <div class="progres" id="progres" aria-hidden="true"></div>
+
+  <article
+    class="container"
+    data-etiqueta-ancora={t("num.ancora")}
+    data-copia={t("num.copia")}
+    data-copiat={t("num.copiat")}
+  >
+    <header class="numero-capcal columna">
+      <Segell
+        llengua={llengua}
+        xifra={numero.exemplar}
+        data={formataMesAny(numero.data, llengua)}
+      />
+
+      <div class="numero-meta">
+        <time datetime={dataISO(numero.data)}>{formataData(numero.data, llengua)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{t("num.lectura", { n: numero.minuts })}</span>
+        {
+          data.updated && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{t("num.actualitzat", { data: formataData(data.updated, llengua) })}</span>
+            </>
+          )
+        }
+      </div>
+
+      <h1 class="numero-titol">{data.title}</h1>
+      {data.subtitle && <p class="numero-subtitol">{data.subtitle}</p>}
+
+      <Etiquetes llengua={llengua} etiquetes={data.tags} centrat />
+
+      <div class="numero-filet" aria-hidden="true"></div>
+    </header>
+
+    {/* `.columna` va al div i no al <details>: la caixa del sumari té vora
+        visible i, si portés el padding del marge, s'estiraria fins a la
+        meitat del gutter amb l'interior buit. */}
+    {
+      mostraSumari && (
+        <div class="columna">
+          <details class="sumari">
+            <summary>{t("num.sumari")}</summary>
+            <ol>
+              {sumari.map((h) => (
+                <li class:list={{ "nivell-3": h.depth === 3 }}>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </details>
+        </div>
+      )
+    }
+
+    <div class="prosa columna">
+      <slot />
+    </div>
+
+    <footer class="numero-peu columna">
+      <p class="firma">
+        <strong>{firmaNom}</strong>
+        {firmaResta.join(" · ")}
+      </p>
+
+      {
+        (anterior || seguent) && (
+          <nav class="veins" aria-label={t("portada.hemeroteca")}>
+            {anterior ? (
+              <a class="vei" href={anterior.url} rel="prev">
+                <span class="vei-etiqueta">← {t("num.anterior")}</span>
+                <span class="vei-titol">{anterior.entrada.data.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {seguent && (
+              <a class="vei vei-seguent" href={seguent.url} rel="next">
+                <span class="vei-etiqueta">{t("num.seguent")} →</span>
+                <span class="vei-titol">{seguent.entrada.data.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+    </footer>
+  </article>
+</Base>
+
+<script>
+  /* Tres millores del text ja renderitzat. Cap és imprescindible: sense
+     JavaScript l'article es llegeix igual, amb els seus ancoratges i el seu
+     codi. Per això res d'això es genera al build. */
+  const article = document.querySelector<HTMLElement>("article[data-etiqueta-ancora]");
+  if (article) {
+    /* ---- 1. Filet de progrés ---- */
+    const barra = document.getElementById("progres");
+    if (barra) {
+      let pendent = false;
+      const pinta = () => {
+        const recorregut = article.offsetTop + article.offsetHeight - window.innerHeight;
+        const fet = recorregut > 0 ? (window.scrollY - article.offsetTop) / recorregut : 0;
+        barra.style.transform = `scaleX(${Math.min(1, Math.max(0, fet))})`;
+        pendent = false;
+      };
+      /* rAF-throttle: llegir scrollY i escriure estils fora del handler evita
+         reflows forçats quan arriben ràfegues d'esdeveniments de scroll. */
+      const alScroll = () => {
+        if (pendent) return;
+        pendent = true;
+        requestAnimationFrame(pinta);
+      };
+      window.addEventListener("scroll", alScroll, { passive: true });
+      window.addEventListener("resize", alScroll, { passive: true });
+      pinta();
+    }
+
+    /* ---- 2. Àncora a cada títol ---- */
+    const etiqueta = article.dataset.etiquetaAncora ?? "Link";
+    article.querySelectorAll<HTMLElement>(".prosa h2[id], .prosa h3[id], .prosa h4[id]").forEach((h) => {
+      const a = document.createElement("a");
+      a.className = "ancora";
+      a.href = `#${h.id}`;
+      a.setAttribute("aria-label", `${etiqueta}: ${h.textContent?.trim() ?? ""}`);
+      a.textContent = "#";
+      h.appendChild(a);
+    });
+
+    /* ---- 3. Botó de copiar a cada bloc de codi ---- */
+    const diuCopia = article.dataset.copia ?? "copy";
+    const diuCopiat = article.dataset.copiat ?? "copied";
+    article.querySelectorAll<HTMLElement>(".bloc-codi").forEach((bloc) => {
+      const barra = bloc.querySelector(".bloc-codi-barra");
+      const codi = bloc.querySelector("code");
+      if (!barra || !codi || !navigator.clipboard) return;
+
+      const boto = document.createElement("button");
+      boto.type = "button";
+      boto.className = "copia-btn";
+      boto.textContent = diuCopia;
+      boto.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(codi.textContent ?? "");
+          boto.textContent = diuCopiat;
+          boto.dataset.fet = "si";
+          setTimeout(() => {
+            boto.textContent = diuCopia;
+            delete boto.dataset.fet;
+          }, 1600);
+        } catch {
+          /* permís denegat o context no segur: el botó no fa res i ja està */
+        }
+      });
+      barra.appendChild(boto);
+    });
+  }
+</script>

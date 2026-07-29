@@ -1,0 +1,28 @@
+# Sortida del build
+dist/
+
+# Tipus generats per Astro
+.astro/
+
+# Dependències
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables d'entorn i secrets — mai al repo
+.env
+.env.local
+.env.production
+.env*.local
+/secrets/
+*.pem
+*.key
+
+# Sistema operatiu i editors
+.DS_Store
+Thumbs.db
+.idea/

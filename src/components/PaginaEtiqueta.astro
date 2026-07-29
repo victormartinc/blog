@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import FilaNumero from "./FilaNumero.astro";
+import { LLENGUES, traductor, type Llengua } from "../i18n/ui";
+import { urlEtiqueta, urlPortada, type Numero } from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+  etiqueta: string;
+  numeros: Numero[];
+  /** Llengües on aquesta mateixa etiqueta també té números. */
+  tambeA: Llengua[];
+}
+
+const { llengua, etiqueta, numeros, tambeA } = Astro.props;
+const t = traductor(llengua);
+
+const recompte =
+  numeros.length === 1
+    ? t("etiqueta.compte1")
+    : t("etiqueta.compte", { n: numeros.length });
+
+const alternatives = Object.fromEntries(
+  LLENGUES.filter((l) => l !== llengua && tambeA.includes(l)).map((l) => [
+    l,
+    urlEtiqueta(l, etiqueta),
+  ]),
+) as Partial<Record<Llengua, string>>;
+---
+
+<Base
+  llengua={llengua}
+  titol={`#${etiqueta}`}
+  descripcio={`${recompte} — ${t("lloc.nom")}`}
+  ruta={urlEtiqueta(llengua, etiqueta)}
+  alternatives={alternatives}
+>
+  <section class="masthead">
+    <div class="container masthead-inner">
+      <hr class="filet-simple" />
+      <p class="masthead-lema" style="margin-top:20px">{t("etiqueta.titol")}</p>
+      <h1 class="masthead-titol" style="font-size:clamp(2rem,7vw,3.4rem)">#{etiqueta}</h1>
+      <div class="bandera">
+        <span>{recompte}</span>
+        <span class="bandera-sep" aria-hidden="true">·</span>
+        <a href={urlPortada(llengua)}>{t("etiqueta.tornar")}</a>
+      </div>
+      <hr class="filet-doble" />
+    </div>
+  </section>
+
+  <section class="seccio container">
+    <ul class="hemeroteca">
+      {numeros.map((n) => <FilaNumero llengua={llengua} numero={n} />)}
+    </ul>
+  </section>
+</Base>

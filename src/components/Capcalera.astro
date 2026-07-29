@@ -1,0 +1,71 @@
+---
+import { LLENGUA_INFO, LLENGUES, traductor, type Llengua } from "../i18n/ui";
+import { urlPortada, urlFeed } from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+  /** Ruta d'aquesta pàgina per llengua; les absents cauen a la portada. */
+  alternatives: Partial<Record<Llengua, string>>;
+}
+
+const { llengua, alternatives } = Astro.props;
+const t = traductor(llengua);
+---
+
+<header class="capcalera">
+  <nav class="capcalera-nav container" aria-label={t("lloc.nom")}>
+    <a class="marca" href={urlPortada(llengua)} aria-label={t("a11y.inici")}>
+      <span class="marca-punt" aria-hidden="true"></span>
+      <span>{t("lloc.nom")}</span>
+      <span class="marca-sub">— {t("lloc.lema").toLowerCase()}</span>
+    </a>
+
+    <div class="capcalera-accions">
+      <a
+        class="enllac-mono enllac-portfolio"
+        href="https://victormartinc.com"
+        rel="me noopener"
+        target="_blank"
+      >
+        {t("nav.portfolio")} <span aria-hidden="true">↗</span>
+      </a>
+
+      <div class="selector-llengua" role="group" aria-label={t("a11y.llengua")}>
+        {
+          LLENGUES.map((l) => {
+            const desti = alternatives[l];
+            return (
+              <a
+                class:list={["llengua-btn", { absent: !desti }]}
+                href={desti ?? urlPortada(l)}
+                hreflang={LLENGUA_INFO[l].bcp47}
+                lang={LLENGUA_INFO[l].bcp47}
+                aria-current={l === llengua ? "true" : undefined}
+                title={LLENGUA_INFO[l].nom}
+              >
+                {LLENGUA_INFO[l].curt}
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <a class="boto-icona" href={urlFeed(llengua)} title={t("nav.feed")} aria-label={t("nav.feed")}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"></path>
+          <circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </a>
+
+      <button class="boto-icona boto-tema" type="button" aria-label={t("a11y.tema")}>
+        <svg class="icona-sol" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icona-lluna" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>

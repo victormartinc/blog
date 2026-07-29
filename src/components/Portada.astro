@@ -1,0 +1,120 @@
+---
+import Segell from "./Segell.astro";
+import Etiquetes from "./Etiquetes.astro";
+import FilaNumero from "./FilaNumero.astro";
+import { traductor, type Llengua } from "../i18n/ui";
+import {
+  dataISO,
+  etiquetesDe,
+  formataData,
+  formataMesAny,
+  perAny,
+  urlFeed,
+  type Numero,
+} from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+  numeros: Numero[];
+}
+
+const { llengua, numeros } = Astro.props;
+const t = traductor(llengua);
+
+const [ultim, ...anteriors] = numeros;
+const anys = perAny(anteriors);
+const etiquetes = etiquetesDe(numeros);
+
+/* La línia de bandera imita el que a una revista de paper és l'any, el
+   número i el lloc d'edició. El «des de» surt del número més antic. */
+const primer = numeros.at(-1);
+const recompte =
+  numeros.length === 1 ? t("bandera.unNumero") : t("bandera.nNumeros", { n: numeros.length });
+---
+
+<section class="masthead">
+  <div class="container masthead-inner">
+    <hr class="filet-doble" />
+    <h1 class="masthead-titol">{t("lloc.nom")}</h1>
+    <p class="masthead-lema">{t("lloc.lema")}</p>
+
+    <div class="bandera">
+      {numeros.length > 0 && <span>{recompte}</span>}
+      {
+        primer && (
+          <>
+            <span class="bandera-sep" aria-hidden="true">·</span>
+            <span>{t("bandera.desde")} {formataMesAny(primer.data, llengua)}</span>
+          </>
+        )
+      }
+      <span class="bandera-sep" aria-hidden="true">·</span>
+      <span>{t("bandera.lloc")}</span>
+      <span class="bandera-sep" aria-hidden="true">·</span>
+      <a href={urlFeed(llengua)}>{t("nav.feed")}</a>
+    </div>
+    <hr class="filet-doble" />
+  </div>
+</section>
+
+{
+  ultim ? (
+    <>
+      <section class="seccio container">
+        <h2 class="seccio-titol">{t("portada.ultim")}</h2>
+
+        <a class="destacat-num" href={ultim.url}>
+          <Segell
+            llengua={llengua}
+            xifra={ultim.exemplar}
+            data={formataMesAny(ultim.data, llengua)}
+          />
+          <div>
+            <h3 class="destacat-titol">{ultim.entrada.data.title}</h3>
+            {ultim.entrada.data.subtitle && (
+              <p class="destacat-subtitol">{ultim.entrada.data.subtitle}</p>
+            )}
+            <p class="destacat-entradeta">{ultim.entrada.data.description}</p>
+
+            <div class="destacat-peu">
+              <time datetime={dataISO(ultim.data)}>{formataData(ultim.data, llengua)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{t("num.lectura", { n: ultim.minuts })}</span>
+            </div>
+
+            <p class="destacat-cta">
+              {t("portada.llegir")} <span class="fletxa" aria-hidden="true">→</span>
+            </p>
+          </div>
+        </a>
+      </section>
+
+      {anteriors.length > 0 && (
+        <section class="seccio container">
+          <h2 class="seccio-titol">{t("portada.hemeroteca")}</h2>
+          {anys.map(({ any, numeros: delAny }) => (
+            <div class="any-bloc">
+              <h3 class="any-titol">{any}</h3>
+              <ul class="hemeroteca">
+                {delAny.map((n) => (
+                  <FilaNumero llengua={llengua} numero={n} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {etiquetes.length > 0 && (
+        <section class="seccio container">
+          <h2 class="seccio-titol">{t("portada.etiquetes")}</h2>
+          <Etiquetes llengua={llengua} etiquetes={etiquetes} />
+        </section>
+      )}
+    </>
+  ) : (
+    <section class="seccio container">
+      <p class="buit">{t("portada.buida")}</p>
+    </section>
+  )
+}

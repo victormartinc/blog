@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import Segell from "../components/Segell.astro";
+import { traductor } from "../i18n/ui";
+import { urlPortada } from "../lib/posts";
+
+/* Una sola pàgina d'error per a tot el lloc: nginx la serveix per a
+   qualsevol ruta que no existeixi, sigui de la llengua que sigui. Va en
+   català perquè és la llengua per defecte del domini. */
+const llengua = "ca" as const;
+const t = traductor(llengua);
+---
+
+<Base
+  llengua={llengua}
+  titol={t("err.titol")}
+  descripcio={t("err.text")}
+  ruta="/404"
+>
+  <section class="error-pagina container">
+    <Segell llengua={llengua} xifra={t("err.segell")} etiqueta="error" />
+    <h1 class="error-titol">{t("err.titol")}</h1>
+    <p class="error-text">{t("err.text")}</p>
+    <a class="btn btn-primary" href={urlPortada(llengua)}>{t("err.tornar")}</a>
+  </section>
+</Base>

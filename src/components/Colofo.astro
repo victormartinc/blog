@@ -1,0 +1,50 @@
+---
+import { traductor, type Llengua } from "../i18n/ui";
+import { urlFeed } from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+}
+
+const { llengua } = Astro.props;
+const t = traductor(llengua);
+
+/* El text del colofó porta un {codi} que ha de ser un enllaç, no text pla:
+   es parteix per la marca i es torna a muntar al voltant de l'<a>. */
+const [abans, despres] = t("colofo.text").split("{codi}");
+const any = new Date().getFullYear();
+---
+
+<footer class="colofo">
+  <div class="container">
+    <div class="colofo-graella">
+      <div>
+        <p class="colofo-lema">{t("colofo.lema")}</p>
+        <p class="colofo-text">
+          {abans}<a href="https://github.com/victormartinc" rel="noopener" target="_blank"
+            >{t("colofo.codi")}</a
+          >{despres}
+        </p>
+      </div>
+
+      <nav aria-label={t("colofo.enllacos")}>
+        <ul class="colofo-llista">
+          <li>
+            <a href="https://victormartinc.com" rel="me noopener" target="_blank"
+              >{t("colofo.portfolio")}</a
+            >
+          </li>
+          <li><a href="mailto:victor@victormartinc.com">{t("colofo.correu")}</a></li>
+          <li><a href={urlFeed(llengua)}>{t("colofo.feed")}</a></li>
+          <li>
+            <a href="https://linkedin.com/in/victormartinca" rel="me noopener" target="_blank"
+              >LinkedIn</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="colofo-copy">{t("colofo.drets", { any })}</p>
+  </div>
+</footer>

@@ -1,0 +1,28 @@
+---
+import PaginaEtiqueta from "../../components/PaginaEtiqueta.astro";
+import { LLENGUA_DEFECTE, type Llengua } from "../../i18n/ui";
+import { paginesEtiqueta, type Numero } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const pagines = await paginesEtiqueta();
+  return pagines
+    .filter((p) => p.llengua === LLENGUA_DEFECTE)
+    .map(({ etiqueta, numeros, tambeA }) => ({
+      params: { etiqueta },
+      props: { etiqueta, numeros, tambeA },
+    }));
+}
+
+const { etiqueta, numeros, tambeA } = Astro.props as {
+  etiqueta: string;
+  numeros: Numero[];
+  tambeA: Llengua[];
+};
+---
+
+<PaginaEtiqueta
+  llengua={LLENGUA_DEFECTE}
+  etiqueta={etiqueta}
+  numeros={numeros}
+  tambeA={tambeA}
+/>

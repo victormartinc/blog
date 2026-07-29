@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+import Portada from "../../components/Portada.astro";
+import { LLENGUES, LLENGUA_DEFECTE, traductor, type Llengua } from "../../i18n/ui";
+import { numerosDe, urlPortada } from "../../lib/posts";
+
+/* Només les llengües amb prefix: el català és la portada de l'arrel. */
+export function getStaticPaths() {
+  return LLENGUES.filter((l) => l !== LLENGUA_DEFECTE).map((lang) => ({
+    params: { lang },
+    props: { lang },
+  }));
+}
+
+const { lang } = Astro.props as { lang: Llengua };
+const t = traductor(lang);
+const numeros = await numerosDe(lang);
+
+const alternatives = Object.fromEntries(
+  LLENGUES.filter((l) => l !== lang).map((l) => [l, urlPortada(l)]),
+) as Partial<Record<Llengua, string>>;
+---
+
+<Base
+  llengua={lang}
+  titol={t("lloc.nom")}
+  descripcio={t("lloc.descripcio")}
+  ruta={urlPortada(lang)}
+  alternatives={alternatives}
+>
+  <Portada llengua={lang} numeros={numeros} />
+</Base>

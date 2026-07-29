@@ -1,0 +1,32 @@
+---
+import type { Llengua } from "../i18n/ui";
+import { urlEtiqueta } from "../lib/posts";
+
+interface Props {
+  llengua: Llengua;
+  etiquetes: readonly string[] | { etiqueta: string; compte: number }[];
+  /** Centra la llista (capçalera d'un número). */
+  centrat?: boolean;
+}
+
+const { llengua, etiquetes, centrat = false } = Astro.props;
+
+const items = etiquetes.map((e) =>
+  typeof e === "string" ? { etiqueta: e, compte: 0 } : e,
+);
+---
+
+{
+  items.length > 0 && (
+    <ul class:list={["etiquetes", { "numero-etiquetes": centrat }]}>
+      {items.map(({ etiqueta, compte }) => (
+        <li>
+          <a class="etiqueta" href={urlEtiqueta(llengua, etiqueta)}>
+            {etiqueta}
+            {compte > 0 && <span class="etiqueta-compte">{compte}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

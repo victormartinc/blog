@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import Portada from "../components/Portada.astro";
+import { traductor } from "../i18n/ui";
+import { numerosDe, urlPortada } from "../lib/posts";
+
+const llengua = "ca" as const;
+const t = traductor(llengua);
+const numeros = await numerosDe(llengua);
+---
+
+<Base
+  llengua={llengua}
+  titol={t("lloc.nom")}
+  descripcio={t("lloc.descripcio")}
+  ruta={urlPortada(llengua)}
+  alternatives={{ es: urlPortada("es"), en: urlPortada("en") }}
+>
+  <Portada llengua={llengua} numeros={numeros} />
+</Base>
