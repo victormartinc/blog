@@ -134,6 +134,10 @@ Tres coses que costen una tarda si no es saben:
 defecte és: editar, `npm run build`, commit local, i parar. El runbook és a
 [deploy/README.md](deploy/README.md).
 
+El VPS fa servir **Caddy** com a reverse-proxy (xarxa Docker `web`), no el
+nginx de Mailcow. Diversos repos d'aquesta carpeta encara documenten el patró
+antic i estan desactualitzats: no els copiïs.
+
 ## Documentació d'Astro
 
 - [Rutes i rutes dinàmiques](https://docs.astro.build/en/guides/routing/)

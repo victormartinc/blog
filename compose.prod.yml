@@ -1,10 +1,10 @@
-# Compose de producció — patró estàndard del VPS (vegeu ~/webs/_template).
+# Compose de producció — mateix patró que el portfolio.
 #
 # - `name:` fixa el project name. Sense aquesta línia Compose el dedueix del
 #   nom del directori, i si la carpeta es mou un `up` crea contenidors
 #   duplicats deixant orfes els que estaven servint.
-# - Sense ports al host: el trànsit entra pel nginx de Mailcow, que resol
-#   `blog` per DNS intern de Docker a la xarxa compartida.
+# - Sense ports al host: el trànsit entra per Caddy, que resol `blog` per
+#   DNS intern de Docker a la xarxa `web`.
 # - Després de `git pull`: docker compose -f compose.prod.yml up -d --build
 
 name: blog
@@ -17,7 +17,7 @@ services:
     image: blog:latest
     container_name: blog
     restart: unless-stopped
-    networks: [mailcow_proxy]
+    networks: [web]
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ > /dev/null || exit 1"]
       interval: 30s
@@ -28,6 +28,6 @@ services:
       - "com.orbitaquality.site=blog"
 
 networks:
-  mailcow_proxy:
+  web:
     external: true
-    name: mailcowdockerized_mailcow-network
+    name: web
