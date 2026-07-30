@@ -37,7 +37,7 @@ idea ha aguantado el enfriamiento, y no antes.
 De cosas que he tocado con las manos:
 
 - **IA aplicada de verdad.** No lo que hace un modelo en una demo, sino qué se
-  rompe cuando el corpus crece o cuando llega la factura.
+  rompe cuando los datos dejan de caber o cuando llega la factura.
 - **Sistemas e infraestructura.** Servidores propios, contenedores, dominios,
   certificados. Cosas aburridas hasta que se caen.
 - **Decisiones y su coste.** Toda decisión técnica es una apuesta con fecha de

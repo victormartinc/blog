@@ -38,7 +38,7 @@ ha aguantat el refredament, i no abans.
 De coses que he tocat amb les mans:
 
 - **IA aplicada de veritat.** No el que fa un model en una demo, sinó què es
-  trenca quan el corpus creix o quan arriba la factura.
+  trenca quan les dades deixen de cabre o quan arriba la factura.
 - **Sistemes i infraestructura.** Servidors propis, contenidors, dominis,
   certificats. Coses avorrides fins que cauen.
 - **Decisions i el seu cost.** Tota decisió tècnica és una aposta amb data de

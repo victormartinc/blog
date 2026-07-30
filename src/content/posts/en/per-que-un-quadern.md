@@ -37,7 +37,7 @@ has survived the cooling, and not before.
 Things I've touched with my hands:
 
 - **Applied AI, for real.** Not what a model does in a demo, but what breaks
-  when the corpus grows or when the invoice arrives.
+  when the data stops fitting or when the invoice arrives.
 - **Systems and infrastructure.** Self-hosted servers, containers, domains,
   certificates. Boring until they fall over.
 - **Decisions and what they cost.** Every technical decision is a bet with an
