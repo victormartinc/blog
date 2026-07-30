@@ -37,14 +37,6 @@ const ca = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  /* A la bandera d'una revista aquest és el lloc on va la periodicitat
-     («Mensual», «Trimestral»). Aquí diu que no n'hi ha: és la informació
-     que el lector busca en aquell punt, i és honesta. */
-  "bandera.periodicitat": "sense periodicitat fixa",
-  "bandera.lloc": "Manresa, Catalunya",
-  "bandera.unPost": "1 post des de {data}",
-  "bandera.nPosts": "{n} posts des de {data}",
-
   "portada.ultim": "últim post",
   "portada.hemeroteca": "tots els posts",
   "portada.etiquetes": "índex d'etiquetes",
@@ -72,7 +64,7 @@ const ca = {
 
   "colofo.lema": "Les coses importants es pensen dues vegades.",
   "colofo.text":
-    "Aquest quadern es compon en Fraunces, Source Serif 4 i IBM Plex Mono. Generat com a HTML estàtic amb Astro i servit des d'un VPS propi, sense rastrejadors de tercers. El codi és a {codi}.",
+    "Generat com a HTML estàtic amb Astro i servit des d'un VPS propi, sense rastrejadors de tercers. El codi és a {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Enllaços",
   "colofo.portfolio": "Portfolio i CV",
@@ -101,11 +93,6 @@ const es: Record<keyof typeof ca, string> = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  "bandera.periodicitat": "sin periodicidad fija",
-  "bandera.lloc": "Manresa, Cataluña",
-  "bandera.unPost": "1 post desde {data}",
-  "bandera.nPosts": "{n} posts desde {data}",
-
   "portada.ultim": "último post",
   "portada.hemeroteca": "todos los posts",
   "portada.etiquetes": "índice de etiquetas",
@@ -133,7 +120,7 @@ const es: Record<keyof typeof ca, string> = {
 
   "colofo.lema": "Las cosas importantes se piensan dos veces.",
   "colofo.text":
-    "Este cuaderno se compone en Fraunces, Source Serif 4 e IBM Plex Mono. Generado como HTML estático con Astro y servido desde un VPS propio, sin rastreadores de terceros. El código está en {codi}.",
+    "Generado como HTML estático con Astro y servido desde un VPS propio, sin rastreadores de terceros. El código está en {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Enlaces",
   "colofo.portfolio": "Portfolio y CV",
@@ -162,11 +149,6 @@ const en: Record<keyof typeof ca, string> = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  "bandera.periodicitat": "no fixed schedule",
-  "bandera.lloc": "Manresa, Catalonia",
-  "bandera.unPost": "1 post since {data}",
-  "bandera.nPosts": "{n} posts since {data}",
-
   "portada.ultim": "latest post",
   "portada.hemeroteca": "all posts",
   "portada.etiquetes": "tag index",
@@ -194,7 +176,7 @@ const en: Record<keyof typeof ca, string> = {
 
   "colofo.lema": "The things that matter get thought through twice.",
   "colofo.text":
-    "This notebook is set in Fraunces, Source Serif 4 and IBM Plex Mono. Built as static HTML with Astro and served from a self-hosted VPS, with no third-party trackers. The source lives on {codi}.",
+    "Built as static HTML with Astro and served from a self-hosted VPS, with no third-party trackers. The source lives on {codi}.",
   "colofo.codi": "GitHub",
   "colofo.enllacos": "Links",
   "colofo.portfolio": "Portfolio & CV",

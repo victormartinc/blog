@@ -2,9 +2,10 @@
    Blog de Víctor Martín — sistema de disseny
    ==========================================================================
 
-   Germà del "Tinta i terra" del portfolio: mateixes variables de color,
-   mateixes tres tipografies, mateix gra de paper. El que hi afegeix és el
-   vocabulari de revista — capçalera de diari, segell de número, capitular,
+   Germà del "Tinta i terra" del portfolio: mateixa tinta blava, mateixes
+   tres tipografies, mateix gra. El paper, en canvi, és un altre — més fred
+   i quadriculat — perquè es noti d'un cop d'ull que no ets al portfolio. La
+   resta és vocabulari de revista: capçalera de diari, segell, capitular,
    notes al marge i colofó.
 
    Ordre del fitxer:
@@ -131,52 +132,63 @@
 
   --ease: cubic-bezier(.22, .8, .3, 1);
 
+  /* Pas de la quadrícula del fons. 24px surt de la retícula d'un quadern de
+     tota la vida; el color el posa cada tema. */
+  --reticula-pas: 24px;
+
   /* gra de paper (feTurbulence inline, compartit pels dos temes) */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f5f4ec;
-  --bg-alt: #ebe9dc;
-  --surface: #fbfaf3;
-  --border: rgba(38, 38, 32, .16);
-  --border-fort: rgba(38, 38, 32, .34);
-  --text: #262620;
-  --text-soft: #5b584a;
-  --text-faint: #6b675a;
-  --accent: #1f5290;          /* blau de tinta d'estilogràfica — 7.1:1 sobre bg */
+  /* Paper d'escriure, més fred i més clar que el crema del portfolio: és el
+     que fa que es noti que has canviat de web. L'accent es queda blau — el
+     parentesc entre les dues sí que ha de sobreviure. */
+  --bg: #f1f1ee;
+  --bg-alt: #e6e6e2;
+  --surface: #fafaf9;
+  --border: rgba(36, 36, 42, .16);
+  --border-fort: rgba(36, 36, 42, .34);
+  --text: #24242a;            /* 13.6:1 sobre bg */
+  --text-soft: #55555c;       /* 6.5:1 */
+  --text-faint: #64646b;      /* 5.2:1 */
+  --accent: #1f5290;          /* blau de tinta d'estilogràfica — 7.0:1 sobre bg */
   --accent-text: #1f5290;
   --on-accent: #ffffff;       /* 7.9:1 sobre l'accent */
   --chip-bg: #e6ebf3;
   --chip-border: rgba(31, 82, 144, .32);
   --avis: #8a4b12;            /* terra cuita per als blocs d'advertència */
-  --avis-bg: #f6ecdf;
-  --shadow: 0 10px 26px rgba(38, 38, 32, .13);
-  --grain-opacity: .035;
+  --avis-bg: #f4ece1;
+  --shadow: 0 10px 26px rgba(36, 36, 42, .12);
+  --grain-opacity: .03;
+  --reticula-color: rgba(36, 36, 42, .07);   /* 1.14:1 sobre el paper */
   --sun: radial-gradient(720px 560px at 85% -5%, rgba(31, 82, 144, .05), transparent 70%);
   --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='10' viewBox='0 0 78 10'%3E%3Cpath d='M2 7 Q10 2 19 6.5 T38 6 T57 7 T76 5.5' fill='none' stroke='%231F5290' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #191b16;
-  --bg-alt: #1e211a;
-  --surface: #242820;
-  --border: rgba(231, 229, 216, .14);
-  --border-fort: rgba(231, 229, 216, .3);
-  --text: #e7e5d8;
-  --text-soft: #b0ad9b;
-  --text-faint: #96927f;
-  --accent: #8fb4e6;          /* blau de tinta a mitja llum — 7.9:1 sobre bg */
+  /* El fosc del portfolio tira a verd terra; aquest és gris tinta. Mateixa
+     lluminositat, temperatura diferent. */
+  --bg: #17181a;
+  --bg-alt: #1c1d20;
+  --surface: #212328;
+  --border: rgba(229, 230, 235, .14);
+  --border-fort: rgba(229, 230, 235, .3);
+  --text: #e5e6eb;            /* 14.3:1 sobre bg */
+  --text-soft: #aaabb2;       /* 7.8:1 */
+  --text-faint: #90919a;      /* 5.7:1 */
+  --accent: #8fb4e6;          /* blau de tinta a mitja llum — 8.3:1 sobre bg */
   --accent-text: #8fb4e6;
-  --on-accent: #131c29;       /* tinta sobre l'accent — 7.8:1 */
+  --on-accent: #131c29;       /* tinta sobre l'accent — 8.0:1 */
   --chip-bg: #242b36;
   --chip-border: rgba(143, 180, 230, .32);
   --avis: #dda15e;
-  --avis-bg: #2b2519;
-  --shadow: 0 10px 26px rgba(0, 0, 0, .35);
-  --grain-opacity: .05;
+  --avis-bg: #2a2519;
+  --shadow: 0 10px 26px rgba(0, 0, 0, .38);
+  --grain-opacity: .045;
+  --reticula-color: rgba(229, 230, 235, .055); /* 1.13:1 sobre el paper */
   --sun: radial-gradient(720px 560px at 85% -5%, rgba(143, 180, 230, .06), transparent 70%);
   --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='10' viewBox='0 0 78 10'%3E%3Cpath d='M2 7 Q10 2 19 6.5 T38 6 T57 7 T76 5.5' fill='none' stroke='%238FB4E6' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
@@ -190,16 +202,23 @@
 
 html { scroll-behavior: smooth; }
 
+/* El fons és paper quadriculat: és el que distingeix el blog del portfolio
+   d'un cop d'ull. Va al `body` (i no a un pseudoelement fix) perquè ha de
+   desplaçar-se amb el text, com el paper de veritat. Tot el que té fons
+   propi —caixes, blocs de codi, colofó— la tapa i guanya profunditat. */
 body {
   margin: 0;
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.72;
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula-color) 0 1px, transparent 1px var(--reticula-pas)),
+    repeating-linear-gradient(to bottom, var(--reticula-color) 0 1px, transparent 1px var(--reticula-pas));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background .3s var(--ease), color .3s var(--ease);
+  transition: background-color .3s var(--ease), color .3s var(--ease);
 }
 
 /* gra de paper per sobre de tot, imperceptible però tàctil */
@@ -456,7 +475,12 @@ a { color: inherit; }
   color: var(--text-soft);
 }
 
-/* Línia de bandera: el que a una revista de paper diu any, número i preu */
+/* El filet de tancament del masthead. La separació la posava la línia de
+   bandera que hi havia entremig; ara que no hi és, se l'ha de posar ell. */
+.masthead-tanca { margin-top: clamp(26px, 3.5vw, 38px); }
+
+/* Línia de dades: a la portada ja no s'usa (el masthead va net), però és el
+   que porta el recompte i la tornada a les pàgines d'etiqueta. */
 .bandera {
   display: flex;
   flex-wrap: wrap;

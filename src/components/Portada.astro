@@ -9,7 +9,6 @@ import {
   formataData,
   formataMesAny,
   perAny,
-  urlFeed,
   type Numero,
 } from "../lib/posts";
 
@@ -24,17 +23,6 @@ const t = traductor(llengua);
 const [ultim, ...anteriors] = numeros;
 const anys = perAny(anteriors);
 const etiquetes = etiquetesDe(numeros);
-
-/* La línia de bandera imita el que a una revista de paper és el número, la
-   periodicitat i el lloc d'edició. El «des de» surt del número més antic i
-   va dins del mateix segment que el recompte: separats eren cinc trossos i
-   al mòbil la línia se n'anava a quatre ratlles. */
-const primer = numeros.at(-1);
-const desDe = primer ? formataMesAny(primer.data, llengua) : "";
-const recompte =
-  numeros.length === 1
-    ? t("bandera.unPost", { data: desDe })
-    : t("bandera.nPosts", { n: numeros.length, data: desDe });
 ---
 
 <section class="masthead">
@@ -42,23 +30,7 @@ const recompte =
     <hr class="filet-doble" />
     <h1 class="masthead-titol">{t("lloc.nom")}</h1>
     <p class="masthead-lema">{t("lloc.lema")}</p>
-
-    <div class="bandera">
-      {
-        numeros.length > 0 && (
-          <>
-            <span>{recompte}</span>
-            <span class="bandera-sep" aria-hidden="true">·</span>
-          </>
-        )
-      }
-      <span>{t("bandera.periodicitat")}</span>
-      <span class="bandera-sep" aria-hidden="true">·</span>
-      <span>{t("bandera.lloc")}</span>
-      <span class="bandera-sep" aria-hidden="true">·</span>
-      <a href={urlFeed(llengua)}>{t("nav.feed")}</a>
-    </div>
-    <hr class="filet-doble" />
+    <hr class="filet-doble masthead-tanca" />
   </div>
 </section>
 
