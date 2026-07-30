@@ -4,6 +4,8 @@ subtitle: "Notes in the margin of work that moves too fast"
 description: "I write down the decisions that normally stay in my head. What goes in here, and why there's no schedule."
 date: 2026-07-29
 tags: ["meta", "writing", "engineering"]
+cover: /img/per-que-un-quadern.jpg
+coverAlt: "An open engineering notebook: the left page full of handwritten notes and sketched diagrams, the right one still blank, with a blue fountain pen beside it."
 ---
 
 Every project I finish leaves a residue that ends up nowhere. Not the code —

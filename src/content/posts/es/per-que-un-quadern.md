@@ -4,6 +4,8 @@ subtitle: "Notas al margen de un trabajo que pasa demasiado deprisa"
 description: "Escribo las decisiones que normalmente se quedan en la cabeza. Qué habrá y por qué no hay calendario."
 date: 2026-07-29
 tags: ["meta", "escritura", "ingeniería"]
+cover: /img/per-que-un-quadern.jpg
+coverAlt: "Un cuaderno de ingeniería abierto: la página izquierda llena de anotaciones y esquemas hechos a mano, la derecha todavía en blanco, con una pluma de tinta azul al lado."
 ---
 
 Cada proyecto que termino deja un poso que no queda en ninguna parte. No

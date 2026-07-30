@@ -4,6 +4,8 @@ subtitle: "Notes al marge d'una feina que passa massa de pressa"
 description: "Escric les decisions que normalment es queden al cap. Què hi haurà i per què no hi ha calendari."
 date: 2026-07-29
 tags: ["meta", "escriptura", "enginyeria"]
+cover: /img/per-que-un-quadern.jpg
+coverAlt: "Un quadern d'enginyeria obert: la pàgina esquerra plena d'anotacions i esquemes fets a mà, la dreta encara en blanc, amb una ploma de tinta blava al costat."
 ---
 
 Cada projecte que acabo deixa un pòsit que no queda enlloc. No parlo del codi
