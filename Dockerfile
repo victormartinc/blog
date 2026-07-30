@@ -1,9 +1,8 @@
 # Blog de Víctor Martín — imatge de producció.
 #
 # Dues etapes: Node compila l'Astro a HTML estàtic, nginx el serveix. La
-# imatge final NO porta Node ni node_modules; és el mateix patró d'nginx
-# alpine que la resta de webs del VPS (vegeu ~/webs/_template al servidor).
-# nginx alpine porta wget, necessari per al healthcheck.
+# imatge final NO porta Node ni node_modules. nginx alpine porta wget, que
+# és el que fa servir el healthcheck.
 
 # ---------- etapa 1: build ----------
 FROM node:24-alpine AS build

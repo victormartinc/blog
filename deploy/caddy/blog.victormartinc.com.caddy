@@ -1,16 +1,12 @@
 # Bloc de Caddy per a blog.victormartinc.com.
 #
-# NO és un fitxer que Caddy llegeixi: el VPS té un únic Caddyfile a
-# /home/victor/server/caddy/Caddyfile i els sitis s'hi afegeixen com a blocs.
-# Això és la còpia versionada del bloc que li toca a aquest lloc, perquè si
-# el Caddyfile es perdés es pogués reconstruir des dels repos.
+# NO és un fitxer que Caddy llegeixi: el servidor té un únic Caddyfile i els
+# sitis s'hi afegeixen com a blocs. Això és la còpia versionada del que li
+# toca a aquest lloc, perquè si el Caddyfile es perdés es pogués reconstruir.
 #
-# L'alta normal NO és copiar això a mà, sinó:
-#
-#   /home/victor/server/caddy/add-site.sh blog.victormartinc.com blog 80
-#
-# que hi afegeix exactament aquest bloc, valida i recarrega Caddy. Caddy
-# demana el certificat de Let's Encrypt tot sol en recarregar-se.
+# L'alta no es fa copiant això a mà: al servidor hi ha un script que hi
+# afegeix el bloc, valida, recarrega i demana el certificat. Caddy s'ocupa
+# tot sol de Let's Encrypt.
 
 blog.victormartinc.com {
 	reverse_proxy blog:80
