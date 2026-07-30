@@ -20,6 +20,9 @@ export async function GET(context: APIContext) {
     description: t("lloc.descripcio"),
     site: context.site ?? "https://blog.victormartinc.com",
     trailingSlash: true,
+    // Perquè un navegador que obri el feed vegi una pàgina i no XML en cru.
+    // Els lectors de feeds ignoren el full d'estil. Vegeu public/rss.xsl.
+    stylesheet: "/rss.xsl",
     items: numeros.map((n) => ({
       title: `${t("post.abrev")} ${String(n.exemplar).padStart(2, "0")} · ${n.entrada.data.title}`,
       description: n.entrada.data.description,
