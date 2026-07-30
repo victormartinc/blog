@@ -13,6 +13,11 @@ const t = traductor(llengua);
    es parteix per la marca i es torna a muntar al voltant de l'<a>. */
 const [abans, despres] = t("colofo.text").split("{codi}");
 const any = new Date().getFullYear();
+
+/* El repositori d'AQUEST blog, no el perfil. El colofó promet «el codi és a
+   GitHub»: si l'enllaç porta al perfil, qui hi clica no el troba. Cal que el
+   repo sigui públic perquè la frase sigui certa. */
+const REPO = "https://github.com/victormartinc/blog";
 ---
 
 <footer class="colofo">
@@ -21,9 +26,7 @@ const any = new Date().getFullYear();
       <div>
         <p class="colofo-lema">{t("colofo.lema")}</p>
         <p class="colofo-text">
-          {abans}<a href="https://github.com/victormartinc" rel="noopener" target="_blank"
-            >{t("colofo.codi")}</a
-          >{despres}
+          {abans}<a href={REPO} rel="noopener" target="_blank">{t("colofo.codi")}</a>{despres}
         </p>
       </div>
 
