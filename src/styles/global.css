@@ -791,6 +791,22 @@ a { color: inherit; }
   border-top: 1px solid var(--border-fort);
 }
 
+/* Portada del post: l'únic element que surt de la columna de text i ocupa
+   el contenidor sencer. La proporció és fixa perquè la maqueta no salti
+   mentre carrega (i perquè totes les portades es vegin iguals encara que
+   la imatge vingui amb mides diferents). */
+.portada-post {
+  margin: 0 0 clamp(30px, 4vw, 44px);
+}
+.portada-post img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
+}
+
 /* Sumari plegable — el que a una revista és l'índex del número */
 .sumari {
   margin: 0 0 clamp(30px, 4vw, 44px);

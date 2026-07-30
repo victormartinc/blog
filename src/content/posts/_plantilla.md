@@ -1,5 +1,5 @@
 ---
-title: "Títol del número"
+title: "Títol del post"
 subtitle: "Opcional — surt en cursiva sota el títol"
 description: "Una frase. Va al feed, a la portada i a les metaetiquetes, o sigui que és el primer que llegeix algú que encara no ha entrat."
 date: 2026-01-01
@@ -12,15 +12,15 @@ draft: true
 
   El carregador de contingut ignora tot el que comenci per guió baix
   (`src/content.config.ts`), així que aquest fitxer no genera cap pàgina ni
-  entra al feed. Per començar un número nou:
+  entra al feed. Per començar un post nou:
 
       cp src/content/posts/_plantilla.md src/content/posts/ca/el-meu-slug.md
 
   El nom del fitxer és el slug de la URL i la clau que lliga les traduccions:
-  `ca/el-meu-slug.md` i `en/el-meu-slug.md` són el mateix número en dues
-  llengües. El número d'exemplar es calcula sol per data.
+  `ca/el-meu-slug.md` i `en/el-meu-slug.md` són el mateix post en dues
+  llengües. El número de post es calcula sol per data.
 
-  Esborra aquest comentari i el `draft: true` quan el número sigui de veritat.
+  Esborra aquest comentari i el `draft: true` quan el post sigui de veritat.
 -->
 
 El primer paràgraf porta capitular. Convé que comenci amb una lletra normal i
@@ -31,7 +31,7 @@ de decidir si es continua.
 
 Text normal, amb **negreta**, *cursiva*, `codi en línia` i
 [enllaços](https://victormartinc.com). El sumari plegable només apareix si el
-número té tres apartats de nivell 2 o més; per sota d'això només fa nosa.
+post té tres apartats de nivell 2 o més; per sota d'això només fa nosa.
 
 ### Un subapartat
 
@@ -57,11 +57,11 @@ Va bé per a l'aclariment que interrompria si anés al cos.
 :::
 
 Aquest paràgraf és el que la nota del costat acompanya. Les notes al marge
-són l'element que dona nom al quadern: si en tot un número no n'hi ha cap,
+són l'element que distingeix la maqueta: si en tot un post no n'hi ha cap,
 potser el text està massa net.
 
 :::destacat
-La cita destacada es fa servir un cop per número, com a molt. Dues ja no
+La cita destacada es fa servir un cop per post, com a molt. Dues ja no
 destaquen res.
 :::
 
@@ -94,7 +94,7 @@ $ docker compose -f compose.prod.yml up -d --build
 
 ## Notes al peu i imatges
 
-També hi ha notes al peu de GFM[^1], que s'acumulen al final del número.
+També hi ha notes al peu de GFM[^1], que s'acumulen al final del post.
 
 ![Peu de la imatge](/img/exemple.jpg)
 

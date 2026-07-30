@@ -20,6 +20,9 @@ interface Props {
   tipus?: "website" | "article";
   publicat?: Date;
   modificat?: Date;
+  /** Ruta de la imatge d'`og:image`. Es converteix a absoluta aquí. */
+  imatge?: string;
+  imatgeAlt?: string;
   /** Article: amaga el colofó gran i deixa el peu del número. */
   ampleComplet?: boolean;
 }
@@ -33,6 +36,8 @@ const {
   tipus = "website",
   publicat,
   modificat,
+  imatge,
+  imatgeAlt,
 } = Astro.props;
 
 const t = traductor(llengua);
@@ -67,7 +72,15 @@ const titolComplet = titol === t("lloc.nom") ? `${titol} — ${t("lloc.lema")}` 
     <meta property="og:title" content={titol} />
     <meta property="og:description" content={descripcio} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content={imatge ? "summary_large_image" : "summary"} />
+    {
+      imatge && (
+        <>
+          <meta property="og:image" content={new URL(imatge, base).href} />
+          <meta property="og:image:alt" content={imatgeAlt ?? titol} />
+        </>
+      )
+    }
     {publicat && <meta property="article:published_time" content={publicat.toISOString()} />}
     {modificat && <meta property="article:modified_time" content={modificat.toISOString()} />}
 

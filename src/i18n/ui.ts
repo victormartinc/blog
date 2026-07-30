@@ -1,11 +1,15 @@
 /**
- * Textos de la interfície. El contingut dels números viu al Markdown; això
- * és només el marc: capçalera, portada, peus i missatges.
+ * Textos de la interfície. El contingut dels posts viu al Markdown; això és
+ * només el marc: capçalera, portada, peus i missatges.
  *
- * `ca` és la llengua completa de referència. Les altres dues es tipen
- * contra ella (`Record<keyof typeof ca, string>`), o sigui que oblidar-se
- * una clau en afegir-la peta al `npm run check` en comptes de sortir en
- * blanc a producció.
+ * `ca` és la llengua completa de referència. Les altres dues es tipen contra
+ * ella (`Record<keyof typeof ca, string>`), o sigui que oblidar-se una clau
+ * en afegir-la peta al `npm run check` en comptes de sortir en blanc a
+ * producció.
+ *
+ * Vocabulari: es diuen **posts** a les tres llengües, no «números». El
+ * disseny continua sent de revista (segell, capçalera de diari, colofó) però
+ * la paraula que llegeix l'usuari és la que espera d'un blog.
  */
 
 export const LLENGUES = ["ca", "es", "en"] as const;
@@ -23,7 +27,7 @@ const ca = {
   "lloc.nom": "Víctor Martín",
   "lloc.lema": "Quadern de tecnologia",
   "lloc.descripcio":
-    "Notes al marge sobre programari, sistemes i IA aplicada. Números sense periodicitat fixa, escrits per Víctor Martín Castilla des de Manresa.",
+    "Notes al marge sobre programari, sistemes i IA aplicada. Posts sense periodicitat fixa, escrits per Víctor Martín Castilla des de Manresa.",
 
   "a11y.saltar": "Salta al contingut",
   "a11y.tema": "Canvia el tema",
@@ -38,34 +42,32 @@ const ca = {
      que el lector busca en aquell punt, i és honesta. */
   "bandera.periodicitat": "sense periodicitat fixa",
   "bandera.lloc": "Manresa, Catalunya",
-  "bandera.unNumero": "1 número des de {data}",
-  "bandera.nNumeros": "{n} números des de {data}",
+  "bandera.unPost": "1 post des de {data}",
+  "bandera.nPosts": "{n} posts des de {data}",
 
-  "portada.ultim": "últim número",
-  "portada.hemeroteca": "hemeroteca",
+  "portada.ultim": "últim post",
+  "portada.hemeroteca": "tots els posts",
   "portada.etiquetes": "índex d'etiquetes",
   "portada.buida":
-    "Encara no hi ha cap número en català. El primer arribarà aviat; mentrestant, potser el trobes en una altra llengua.",
-  "portada.llegir": "Llegeix el número",
+    "Encara no hi ha cap post en català. El primer arribarà aviat; mentrestant, potser el trobes en una altra llengua.",
+  "portada.llegir": "Llegeix-lo",
 
-  "num.abrev": "Núm.",
-  "num.exemplar": "número",
-  "num.lectura": "{n} min de lectura",
-  "num.actualitzat": "Actualitzat el {data}",
-  "num.sumari": "sumari del número",
-  "num.anterior": "número anterior",
-  "num.seguent": "número següent",
-  "num.tambeEn": "També en",
-  "num.copia": "copia",
-  "num.copiat": "copiat",
-  "num.ancora": "Enllaç a aquesta secció",
+  "post.abrev": "Post",
+  "post.lectura": "{n} min de lectura",
+  "post.actualitzat": "Actualitzat el {data}",
+  "post.sumari": "sumari",
+  "post.anterior": "post anterior",
+  "post.seguent": "post següent",
+  "post.copia": "copia",
+  "post.copiat": "copiat",
+  "post.ancora": "Enllaç a aquesta secció",
 
   "firma.text": "Víctor Martín Castilla",
   "firma.peu": "Enginyer de sistemes TIC · Manresa\nEscriu-me: victor@victormartinc.com",
 
   "etiqueta.titol": "Etiqueta",
-  "etiqueta.compte": "{n} números amb aquesta etiqueta",
-  "etiqueta.compte1": "1 número amb aquesta etiqueta",
+  "etiqueta.compte": "{n} posts amb aquesta etiqueta",
+  "etiqueta.compte1": "1 post amb aquesta etiqueta",
   "etiqueta.tornar": "Tornar a la portada",
 
   "colofo.lema": "Les coses importants es pensen dues vegades.",
@@ -78,9 +80,9 @@ const ca = {
   "colofo.feed": "Feed RSS",
   "colofo.drets": "© {any} Víctor Martín Castilla",
 
-  "err.titol": "Aquest número no existeix",
+  "err.titol": "Aquest post no existeix",
   "err.text":
-    "L'adreça no correspon a cap número publicat. Potser l'enllaç és antic o hi ha una errata en el camí.",
+    "L'adreça no correspon a cap post publicat. Potser l'enllaç és antic o hi ha una errata en el camí.",
   "err.tornar": "Tornar a la portada",
   "err.segell": "404",
 } as const;
@@ -89,7 +91,7 @@ const es: Record<keyof typeof ca, string> = {
   "lloc.nom": "Víctor Martín",
   "lloc.lema": "Cuaderno de tecnología",
   "lloc.descripcio":
-    "Notas al margen sobre software, sistemas e IA aplicada. Números sin periodicidad fija, escritos por Víctor Martín Castilla desde Manresa.",
+    "Notas al margen sobre software, sistemas e IA aplicada. Posts sin periodicidad fija, escritos por Víctor Martín Castilla desde Manresa.",
 
   "a11y.saltar": "Saltar al contenido",
   "a11y.tema": "Cambiar el tema",
@@ -101,34 +103,32 @@ const es: Record<keyof typeof ca, string> = {
 
   "bandera.periodicitat": "sin periodicidad fija",
   "bandera.lloc": "Manresa, Cataluña",
-  "bandera.unNumero": "1 número desde {data}",
-  "bandera.nNumeros": "{n} números desde {data}",
+  "bandera.unPost": "1 post desde {data}",
+  "bandera.nPosts": "{n} posts desde {data}",
 
-  "portada.ultim": "último número",
-  "portada.hemeroteca": "hemeroteca",
+  "portada.ultim": "último post",
+  "portada.hemeroteca": "todos los posts",
   "portada.etiquetes": "índice de etiquetas",
   "portada.buida":
-    "Todavía no hay ningún número en castellano. El primero llegará pronto; mientras tanto, quizá lo encuentres en otro idioma.",
-  "portada.llegir": "Leer el número",
+    "Todavía no hay ningún post en castellano. El primero llegará pronto; mientras tanto, quizá lo encuentres en otro idioma.",
+  "portada.llegir": "Leerlo",
 
-  "num.abrev": "Núm.",
-  "num.exemplar": "número",
-  "num.lectura": "{n} min de lectura",
-  "num.actualitzat": "Actualizado el {data}",
-  "num.sumari": "sumario del número",
-  "num.anterior": "número anterior",
-  "num.seguent": "número siguiente",
-  "num.tambeEn": "También en",
-  "num.copia": "copiar",
-  "num.copiat": "copiado",
-  "num.ancora": "Enlace a esta sección",
+  "post.abrev": "Post",
+  "post.lectura": "{n} min de lectura",
+  "post.actualitzat": "Actualizado el {data}",
+  "post.sumari": "sumario",
+  "post.anterior": "post anterior",
+  "post.seguent": "post siguiente",
+  "post.copia": "copiar",
+  "post.copiat": "copiado",
+  "post.ancora": "Enlace a esta sección",
 
   "firma.text": "Víctor Martín Castilla",
   "firma.peu": "Ingeniero de sistemas TIC · Manresa\nEscríbeme: victor@victormartinc.com",
 
   "etiqueta.titol": "Etiqueta",
-  "etiqueta.compte": "{n} números con esta etiqueta",
-  "etiqueta.compte1": "1 número con esta etiqueta",
+  "etiqueta.compte": "{n} posts con esta etiqueta",
+  "etiqueta.compte1": "1 post con esta etiqueta",
   "etiqueta.tornar": "Volver a la portada",
 
   "colofo.lema": "Las cosas importantes se piensan dos veces.",
@@ -141,9 +141,9 @@ const es: Record<keyof typeof ca, string> = {
   "colofo.feed": "Feed RSS",
   "colofo.drets": "© {any} Víctor Martín Castilla",
 
-  "err.titol": "Este número no existe",
+  "err.titol": "Este post no existe",
   "err.text":
-    "La dirección no corresponde a ningún número publicado. Quizá el enlace sea antiguo o haya una errata en la ruta.",
+    "La dirección no corresponde a ningún post publicado. Quizá el enlace sea antiguo o haya una errata en la ruta.",
   "err.tornar": "Volver a la portada",
   "err.segell": "404",
 };
@@ -152,7 +152,7 @@ const en: Record<keyof typeof ca, string> = {
   "lloc.nom": "Víctor Martín",
   "lloc.lema": "A notebook on technology",
   "lloc.descripcio":
-    "Notes in the margin on software, systems and applied AI. Issues on no fixed schedule, written by Víctor Martín Castilla from Manresa.",
+    "Notes in the margin on software, systems and applied AI. Posts on no fixed schedule, written by Víctor Martín Castilla from Manresa.",
 
   "a11y.saltar": "Skip to content",
   "a11y.tema": "Toggle theme",
@@ -164,34 +164,32 @@ const en: Record<keyof typeof ca, string> = {
 
   "bandera.periodicitat": "no fixed schedule",
   "bandera.lloc": "Manresa, Catalonia",
-  "bandera.unNumero": "1 issue since {data}",
-  "bandera.nNumeros": "{n} issues since {data}",
+  "bandera.unPost": "1 post since {data}",
+  "bandera.nPosts": "{n} posts since {data}",
 
-  "portada.ultim": "latest issue",
-  "portada.hemeroteca": "back issues",
+  "portada.ultim": "latest post",
+  "portada.hemeroteca": "all posts",
   "portada.etiquetes": "tag index",
   "portada.buida":
-    "There are no issues in English yet. The first one is on its way; in the meantime, you may find it in another language.",
-  "portada.llegir": "Read the issue",
+    "There are no posts in English yet. The first one is on its way; in the meantime, you may find it in another language.",
+  "portada.llegir": "Read it",
 
-  "num.abrev": "No.",
-  "num.exemplar": "issue",
-  "num.lectura": "{n} min read",
-  "num.actualitzat": "Updated on {data}",
-  "num.sumari": "in this issue",
-  "num.anterior": "previous issue",
-  "num.seguent": "next issue",
-  "num.tambeEn": "Also in",
-  "num.copia": "copy",
-  "num.copiat": "copied",
-  "num.ancora": "Link to this section",
+  "post.abrev": "Post",
+  "post.lectura": "{n} min read",
+  "post.actualitzat": "Updated on {data}",
+  "post.sumari": "contents",
+  "post.anterior": "previous post",
+  "post.seguent": "next post",
+  "post.copia": "copy",
+  "post.copiat": "copied",
+  "post.ancora": "Link to this section",
 
   "firma.text": "Víctor Martín Castilla",
   "firma.peu": "ICT systems engineer · Manresa\nGet in touch: victor@victormartinc.com",
 
   "etiqueta.titol": "Tag",
-  "etiqueta.compte": "{n} issues with this tag",
-  "etiqueta.compte1": "1 issue with this tag",
+  "etiqueta.compte": "{n} posts with this tag",
+  "etiqueta.compte1": "1 post with this tag",
   "etiqueta.tornar": "Back to the front page",
 
   "colofo.lema": "The things that matter get thought through twice.",
@@ -204,9 +202,9 @@ const en: Record<keyof typeof ca, string> = {
   "colofo.feed": "RSS feed",
   "colofo.drets": "© {any} Víctor Martín Castilla",
 
-  "err.titol": "This issue does not exist",
+  "err.titol": "This post does not exist",
   "err.text":
-    "That address doesn't match any published issue. The link may be old, or there may be a typo in the path.",
+    "That address doesn't match any published post. The link may be old, or there may be a typo in the path.",
   "err.tornar": "Back to the front page",
   "err.segell": "404",
 };
@@ -215,11 +213,11 @@ export const UI = { ca, es, en } as const;
 export type ClauUI = keyof typeof ca;
 
 /**
- * Traductor per a una llengua. El segon argument substitueix els
- * marcadors `{nom}` del text.
+ * Traductor per a una llengua. El segon argument substitueix els marcadors
+ * `{nom}` del text.
  *
  *   const t = traductor("es");
- *   t("num.lectura", { n: 7 })   // → "7 min de lectura"
+ *   t("post.lectura", { n: 7 })   // → "7 min de lectura"
  */
 export function traductor(llengua: Llengua) {
   const dicc = UI[llengua] ?? UI[LLENGUA_DEFECTE];

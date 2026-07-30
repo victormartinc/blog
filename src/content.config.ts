@@ -23,6 +23,14 @@ const posts = defineCollection({
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    /**
+     * Imatge de capçalera, dins de `public/` (p. ex. `/img/el-meu-post.jpg`).
+     * És una ruta i no un import: el fitxer no es processa ni es comprova al
+     * build, o sigui que una ruta equivocada dona un 404 silenciós. També
+     * fa d'`og:image`, per això `coverAlt` no és decoratiu.
+     */
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
   }),
 });
 

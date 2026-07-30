@@ -21,7 +21,7 @@ export async function GET(context: APIContext) {
     site: context.site ?? "https://blog.victormartinc.com",
     trailingSlash: true,
     items: numeros.map((n) => ({
-      title: `${t("num.abrev")} ${String(n.exemplar).padStart(2, "0")} · ${n.entrada.data.title}`,
+      title: `${t("post.abrev")} ${String(n.exemplar).padStart(2, "0")} · ${n.entrada.data.title}`,
       description: n.entrada.data.description,
       pubDate: n.data,
       link: n.url,

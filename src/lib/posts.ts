@@ -51,7 +51,7 @@ export function urlPortada(llengua: Llengua): string {
 }
 
 export function urlNumero(llengua: Llengua, slug: string): string {
-  return llengua === LLENGUA_DEFECTE ? `/n/${slug}/` : `/${llengua}/n/${slug}/`;
+  return llengua === LLENGUA_DEFECTE ? `/p/${slug}/` : `/${llengua}/p/${slug}/`;
 }
 
 export function urlEtiqueta(llengua: Llengua, etiqueta: string): string {

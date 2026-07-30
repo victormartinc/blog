@@ -33,8 +33,8 @@ const primer = numeros.at(-1);
 const desDe = primer ? formataMesAny(primer.data, llengua) : "";
 const recompte =
   numeros.length === 1
-    ? t("bandera.unNumero", { data: desDe })
-    : t("bandera.nNumeros", { n: numeros.length, data: desDe });
+    ? t("bandera.unPost", { data: desDe })
+    : t("bandera.nPosts", { n: numeros.length, data: desDe });
 ---
 
 <section class="masthead">
@@ -84,7 +84,7 @@ const recompte =
             <div class="destacat-peu">
               <time datetime={dataISO(ultim.data)}>{formataData(ultim.data, llengua)}</time>
               <span aria-hidden="true">·</span>
-              <span>{t("num.lectura", { n: ultim.minuts })}</span>
+              <span>{t("post.lectura", { n: ultim.minuts })}</span>
             </div>
 
             <p class="destacat-cta">

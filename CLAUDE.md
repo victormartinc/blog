@@ -1,8 +1,8 @@
 # Blog de Víctor Martín — instruccions per a Claude
 
-Blog personal de tecnologia. Astro + Markdown, sortida estàtica, números
-sense periodicitat fixa. La visió general és al [README.md](README.md); aquí
-hi ha el que cal saber per treballar-hi sense trencar res.
+Blog personal de tecnologia. Astro + Markdown, sortida estàtica, posts sense
+periodicitat fixa. La visió general és al [README.md](README.md); aquí hi ha
+el que cal saber per treballar-hi sense trencar res.
 
 ## Servidor de desenvolupament
 
@@ -18,17 +18,27 @@ detecta els errors de `getStaticPaths`, que només surten al build.
 
 ## La metàfora, i per què importa
 
-El blog es presenta com una **revista**. Cada article és un *número*. Això no
-és només copy: condiciona components (`Segell`, `Portada`, `Colofo`), el
-vocabulari de la interfície (*número*, *hemeroteca*) i les decisions de
-disseny. Si afegeixes alguna cosa, que hi encaixi — un element que sembli
-d'un SaaS desentona immediatament.
+El **disseny** és de revista: segell d'exemplar, capçalera de diari amb
+filets, capitular, notes al marge, colofó. Els components hi van al darrere
+(`Segell`, `Portada`, `Colofo`). Si afegeixes alguna cosa, que hi encaixi —
+un element que sembli d'un SaaS desentona immediatament.
 
-**No hi ha periodicitat, i és deliberat.** Poden sortir tres números en un
-mes i cap el següent. Res del codi ni dels textos ha de prometre una
-cadència: la bandera de la portada ho diu explícitament
-(`bandera.periodicitat`), que és on una revista posaria «Mensual». Si algun
-dia hi tornes a escriure «mensual» en algun lloc, és un error.
+El **vocabulari**, en canvi, és de blog: se'n diuen **posts** a les tres
+llengües, i el que numera el segell és el número de post. «Número» i
+«hemeroteca» es van fer servir al principi i es van retirar el 30-07-2026
+perquè quedaven forçats. Si en tornes a escriure cap dels dos en text
+visible, és un error.
+
+> Les claus i els noms interns encara diuen `numero`/`Numero` (el tipus de
+> `lib/posts.ts`, les classes `.numero-*` del CSS, `FilaNumero.astro`). És
+> deute conscient, no descuit: renombrar-ho no canvia res que es vegi. El
+> que sí que ha d'estar net és tot el que llegeix l'usuari.
+
+**No hi ha periodicitat, i és deliberat.** Poden sortir tres posts en un mes
+i cap el següent. Res del codi ni dels textos ha de prometre una cadència: la
+bandera de la portada ho diu explícitament (`bandera.periodicitat`), que és
+on una revista posaria «Mensual». Si algun dia hi tornes a escriure «mensual»
+en algun lloc, és un error.
 
 El nom públic és simplement **Víctor Martín**, amb el lema fent de subtítol.
 Viu a la clau `lloc.nom` de `src/i18n/ui.ts` i enlloc més: la capçalera, el
@@ -40,11 +50,12 @@ títols, Fraunces / Source Serif 4 / IBM Plex Mono. **Si canvies un color,
 mira't abans el `styles.css` del portfolio**: els dos han de continuar
 semblant de la mateixa família.
 
-## Com s'escriu un número
+## Com s'escriu un post
 
-Fitxer Markdown a `src/content/posts/<ca|es|en>/<slug>.md`. El nom del fitxer
-és el slug de la URL **i** la clau que lliga les traduccions: mateix nom en
-dues carpetes = mateix número en dues llengües.
+Fitxer Markdown a `src/content/posts/<ca|es|en>/<slug>.md`, que surt a
+`/p/<slug>` (o `/es/p/<slug>`). El nom del fitxer és el slug de la URL **i**
+la clau que lliga les traduccions: mateix nom en dues carpetes = mateix post
+en dues llengües.
 
 Capçalera completa:
 
@@ -56,12 +67,19 @@ description: "Obligatòria. Va al feed, a les targetes i a les metaetiquetes."
 date: 2026-08-14
 tags: ["rag", "llm"]
 draft: false            # opcional; un esborrany no es publica ni surt al feed
+cover: /img/rag.jpg     # opcional; també fa d'og:image
+coverAlt: "Descripció de la imatge"
 ---
 ```
 
-El **número d'exemplar es calcula sol**: s'ordenen tots els articles per data
-i el més antic és el Núm. 01. No l'escriguis a la capçalera; si ho fas,
-s'ignora. Corol·lari: canviar la data d'un article renumera els posteriors.
+El `cover` és una **ruta dins de `public/`**, no un import: el build no
+comprova que el fitxer existeixi, així que una ruta equivocada dona un 404
+silenciós. Es mostra a 16:9 retallat (`object-fit: cover`) i és l'únic
+element del post que ocupa tot el contenidor en lloc de la columna de text.
+
+El **número de post es calcula sol**: s'ordenen tots per data i el més antic
+és el Post 01. No l'escriguis a la capçalera; si ho fas, s'ignora.
+Corol·lari: canviar la data d'un post renumera els posteriors.
 
 ### Sintaxi ampliada
 
@@ -118,14 +136,14 @@ Tres coses que costen una tarda si no es saben:
 
   Compte: si esborres `.astro/` **amb el servidor de desenvolupament en
   marxa**, el servidor es queda amb el magatzem de contingut buit i serveix
-  una portada sense cap número fins que el reiniciïs. No és cap error del
+  una portada sense cap post fins que el reiniciïs. No és cap error del
   codi. Atura'l abans, o reinicia'l després.
 
 ## Coses que costen de descobrir sol
 
 - **Les traduccions es lliguen pel nom del fitxer**, no per cap camp de la
   capçalera. Si reanomenes `ca/foo.md` i no reanomenes `es/foo.md`, el
-  selector d'idioma deixa de trobar-les i cada una passa a ser un número
+  selector d'idioma deixa de trobar-les i cada una passa a ser un post
   independent (amb la seva pròpia numeració). No hi ha cap error al build.
 
 - **`Astro.currentLocale` no és fiable a les rutes `[lang]`** quan el

@@ -16,7 +16,7 @@ interface Props {
 
 const { llengua, xifra, data, petit = false, etiqueta } = Astro.props;
 const t = traductor(llengua);
-const marca = etiqueta ?? t("num.abrev");
+const marca = etiqueta ?? t("post.abrev");
 const numero = typeof xifra === "number" ? String(xifra).padStart(2, "0") : xifra;
 ---
 

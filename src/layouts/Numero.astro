@@ -47,14 +47,16 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
   tipus="article"
   publicat={numero.data}
   modificat={data.updated}
+  imatge={data.cover}
+  imatgeAlt={data.coverAlt}
 >
   <div class="progres" id="progres" aria-hidden="true"></div>
 
   <article
     class="container"
-    data-etiqueta-ancora={t("num.ancora")}
-    data-copia={t("num.copia")}
-    data-copiat={t("num.copiat")}
+    data-etiqueta-ancora={t("post.ancora")}
+    data-copia={t("post.copia")}
+    data-copiat={t("post.copiat")}
   >
     <header class="numero-capcal columna">
       <Segell
@@ -66,12 +68,12 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
       <div class="numero-meta">
         <time datetime={dataISO(numero.data)}>{formataData(numero.data, llengua)}</time>
         <span aria-hidden="true">·</span>
-        <span>{t("num.lectura", { n: numero.minuts })}</span>
+        <span>{t("post.lectura", { n: numero.minuts })}</span>
         {
           data.updated && (
             <>
               <span aria-hidden="true">·</span>
-              <span>{t("num.actualitzat", { data: formataData(data.updated, llengua) })}</span>
+              <span>{t("post.actualitzat", { data: formataData(data.updated, llengua) })}</span>
             </>
           )
         }
@@ -85,6 +87,22 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
       <div class="numero-filet" aria-hidden="true"></div>
     </header>
 
+    {/* La portada surt de la columna de text a propòsit: ocupa el
+        contenidor sencer i és l'únic element del post que ho fa. */}
+    {
+      data.cover && (
+        <figure class="portada-post">
+          <img
+            src={data.cover}
+            alt={data.coverAlt ?? ""}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
     {/* `.columna` va al div i no al <details>: la caixa del sumari té vora
         visible i, si portés el padding del marge, s'estiraria fins a la
         meitat del gutter amb l'interior buit. */}
@@ -92,7 +110,7 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
       mostraSumari && (
         <div class="columna">
           <details class="sumari">
-            <summary>{t("num.sumari")}</summary>
+            <summary>{t("post.sumari")}</summary>
             <ol>
               {sumari.map((h) => (
                 <li class:list={{ "nivell-3": h.depth === 3 }}>
@@ -120,7 +138,7 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
           <nav class="veins" aria-label={t("portada.hemeroteca")}>
             {anterior ? (
               <a class="vei" href={anterior.url} rel="prev">
-                <span class="vei-etiqueta">← {t("num.anterior")}</span>
+                <span class="vei-etiqueta">← {t("post.anterior")}</span>
                 <span class="vei-titol">{anterior.entrada.data.title}</span>
               </a>
             ) : (
@@ -128,7 +146,7 @@ const [firmaNom, ...firmaResta] = t("firma.peu").split("\n");
             )}
             {seguent && (
               <a class="vei vei-seguent" href={seguent.url} rel="next">
-                <span class="vei-etiqueta">{t("num.seguent")} →</span>
+                <span class="vei-etiqueta">{t("post.seguent")} →</span>
                 <span class="vei-titol">{seguent.entrada.data.title}</span>
               </a>
             )}
