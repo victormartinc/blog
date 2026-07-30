@@ -8,3 +8,14 @@
 
 # Les fonts són binàries: cap conversió de finals de línia.
 *.woff2 binary
+
+# GitHub calcula el llenguatge del repo per bytes, i com que `global.css` és
+# el fitxer més gros de tots etiquetava el projecte com a «CSS». No és fals,
+# però desorienta: el que hi ha per mirar aquí són els components .astro i
+# els plugins de Sätteri.
+#
+# `linguist-detectable=false` només el treu del recompte d'aquesta barra —
+# no l'amaga, no l'exclou de les cerques i no canvia res del build. Es fa
+# servir aquest atribut i no `linguist-documentation` perquè aquest CSS és
+# codi, i etiquetar-lo de documentació seria mentir per quedar bé.
+src/styles/global.css linguist-detectable=false
