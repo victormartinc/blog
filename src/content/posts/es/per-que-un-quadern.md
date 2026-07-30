@@ -8,13 +8,12 @@ cover: /img/per-que-un-quadern.jpg
 coverAlt: "Un cuaderno de ingeniería abierto: la página izquierda llena de anotaciones y esquemas hechos a mano, la derecha todavía en blanco, con una pluma de tinta azul al lado."
 ---
 
-Cada proyecto que termino deja un poso que no queda en ninguna parte. No
-hablo del código —eso queda, y con historial— sino de la capa de debajo: por
-qué elegimos esta base de datos y no la otra, qué dimos por bueno sin medir,
-qué decisión de hace seis meses nos ha costado una semana ahora. Esa capa
-vive en la cabeza, y la cabeza es un soporte pésimo.
+Termino un proyecto y el código queda, con todo su historial. Las decisiones
+que hay detrás no quedan en ninguna parte: por qué elegí esta base de datos y
+no otra, qué di por bueno sin medir, qué decisión de hace seis meses me ha
+costado una semana ahora. Se me quedan en la cabeza, y la cabeza olvida.
 
-Esto es el intento de escribirla.
+Aquí las escribo.
 
 :::marge
 La idea no es nueva: es el *engineering notebook* de toda la vida. Lo que le

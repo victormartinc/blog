@@ -8,13 +8,13 @@ cover: /img/per-que-un-quadern.jpg
 coverAlt: "Un quadern d'enginyeria obert: la pàgina esquerra plena d'anotacions i esquemes fets a mà, la dreta encara en blanc, amb una ploma de tinta blava al costat."
 ---
 
-Cada projecte que acabo deixa un pòsit que no queda enlloc. No parlo del codi
-—això queda, i amb historial— sinó de la capa de sota: per què vam triar
-aquesta base de dades i no l'altra, què vam donar per bo sense mesurar, quina
-decisió de fa sis mesos ens ha costat una setmana ara. Aquesta capa viu al
-cap, i el cap és un suport terrible.
+Acabo un projecte i el codi queda, amb tot el seu historial. Les decisions
+que hi ha al darrere no queden enlloc: per què vaig triar aquesta base de
+dades i no una altra, què vaig donar per bo sense mesurar, quina decisió de
+fa sis mesos m'ha costat una setmana ara. Se'm queden al cap, i el cap
+oblida.
 
-Això és l'intent d'escriure-la.
+Aquí les escric.
 
 :::marge
 La idea no és nova: és el *engineering notebook* de tota la vida. El que hi

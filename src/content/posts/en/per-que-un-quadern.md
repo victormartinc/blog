@@ -8,13 +8,12 @@ cover: /img/per-que-un-quadern.jpg
 coverAlt: "An open engineering notebook: the left page full of handwritten notes and sketched diagrams, the right one still blank, with a blue fountain pen beside it."
 ---
 
-Every project I finish leaves a residue that ends up nowhere. Not the code —
-that survives, with a history attached — but the layer underneath it: why we
-picked this database and not the other one, what we assumed without
-measuring, which decision from six months ago cost us a week just now. That
-layer lives in my head, and my head is a terrible storage medium.
+I finish a project and the code stays, with its whole history. The decisions
+behind it don't stay anywhere: why I picked this database and not another
+one, what I took on trust without measuring, which decision from six months
+ago cost me a week just now. They stay in my head, and my head forgets.
 
-This is the attempt to write it down.
+Here I write them down.
 
 :::marge
 The idea isn't new — it's the old engineering notebook. What I'm adding is
