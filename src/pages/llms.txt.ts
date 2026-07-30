@@ -16,9 +16,11 @@ export async function GET(context: APIContext) {
   const linies: string[] = [
     `# ${t("lloc.nom")} — ${t("lloc.lema")}`,
     "",
-    `> ${t("lloc.descripcio")} Publicació mensual: cada article és un número`,
-    "> numerat. Web estàtica trilingüe (català, castellà, anglès), servida des",
-    "> d'infraestructura pròpia.",
+    /* La descripció ja diu que no hi ha periodicitat: aquí només s'hi afegeix
+       el que no diu — que la unitat de publicació és el número. */
+    `> ${t("lloc.descripcio")} Cada article és un número numerat. Web estàtica`,
+    "> trilingüe (català, castellà, anglès), servida des d'infraestructura",
+    "> pròpia.",
     "",
     "## Portades",
     "",

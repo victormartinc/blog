@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Quadern mensual de tecnologia de Víctor Martín Castilla",
+  "description": "Quadern de tecnologia de Víctor Martín Castilla",
   "engines": {
     "node": ">=22.12.0"
   },

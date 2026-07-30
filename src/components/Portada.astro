@@ -25,11 +25,16 @@ const [ultim, ...anteriors] = numeros;
 const anys = perAny(anteriors);
 const etiquetes = etiquetesDe(numeros);
 
-/* La línia de bandera imita el que a una revista de paper és l'any, el
-   número i el lloc d'edició. El «des de» surt del número més antic. */
+/* La línia de bandera imita el que a una revista de paper és el número, la
+   periodicitat i el lloc d'edició. El «des de» surt del número més antic i
+   va dins del mateix segment que el recompte: separats eren cinc trossos i
+   al mòbil la línia se n'anava a quatre ratlles. */
 const primer = numeros.at(-1);
+const desDe = primer ? formataMesAny(primer.data, llengua) : "";
 const recompte =
-  numeros.length === 1 ? t("bandera.unNumero") : t("bandera.nNumeros", { n: numeros.length });
+  numeros.length === 1
+    ? t("bandera.unNumero", { data: desDe })
+    : t("bandera.nNumeros", { n: numeros.length, data: desDe });
 ---
 
 <section class="masthead">
@@ -39,15 +44,15 @@ const recompte =
     <p class="masthead-lema">{t("lloc.lema")}</p>
 
     <div class="bandera">
-      {numeros.length > 0 && <span>{recompte}</span>}
       {
-        primer && (
+        numeros.length > 0 && (
           <>
+            <span>{recompte}</span>
             <span class="bandera-sep" aria-hidden="true">·</span>
-            <span>{t("bandera.desde")} {formataMesAny(primer.data, llengua)}</span>
           </>
         )
       }
+      <span>{t("bandera.periodicitat")}</span>
       <span class="bandera-sep" aria-hidden="true">·</span>
       <span>{t("bandera.lloc")}</span>
       <span class="bandera-sep" aria-hidden="true">·</span>

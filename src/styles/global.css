@@ -1377,6 +1377,16 @@ a { color: inherit; }
 @media (max-width: 680px) {
   body { font-size: 16.5px; }
   .container { padding-inline: 18px; }
+
+  /* La bandera no hi cap en una ratlla i cada tros acaba caient a la seva,
+     amb el punt volat penjant al final. Apilada i sense punts queda com el
+     bloc de dades d'una capçalera de diari, que és el que és. */
+  .bandera {
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1.5;
+  }
+  .bandera-sep { display: none; }
   .fila-num {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 4px 12px;

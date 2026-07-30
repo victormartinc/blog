@@ -1,7 +1,7 @@
 ---
 title: "Per què un quadern"
 subtitle: "Notes al marge d'una feina que passa massa de pressa"
-description: "Obro un quadern mensual per escriure les decisions que normalment es queden al cap. Què hi haurà, cada quant, i per què en tres llengües."
+description: "Obro un quadern per escriure les decisions que normalment es queden al cap. Què hi haurà, per què no hi ha calendari, i per què en tres llengües."
 date: 2026-07-29
 tags: ["meta", "escriptura", "enginyeria"]
 ---
@@ -16,25 +16,27 @@ Aquest quadern és l'intent d'escriure-la.
 
 :::marge
 La idea no és nova: és el *engineering notebook* de tota la vida. El que hi
-afegeixo és la cadència, que per a mi és el que fa que sobrevisqui.
+afegeixo és treure-li el calendari de sobre, que per a mi és el que fa que
+sobrevisqui.
 :::
 
-## Un número al mes, i prou
+## Sense calendari
 
-Escriure sovint em sortiria malament. Ho he provat, i el resultat previsible
-és apunts a mitges publicats per no trencar la ratxa. Així que la unitat aquí
-no és el post: és el **número**. Un al mes, numerat i datat, com una revista
-petita.
+Escriure per calendari em sortiria malament. Ho he provat, i el resultat
+previsible són apunts a mitges publicats per no trencar la ratxa. Així que
+aquí no hi ha periodicitat: la unitat no és la setmana ni el mes, és el
+**número**. Numerat i datat, com una revista petita que surt quan té alguna
+cosa a dir.
 
-La restricció fa dues coses. La primera, obvia: obliga a tenir alguna cosa a
-dir. La segona és menys evident i m'importa més —un mes és prou temps perquè
-una idea es refredi. El que sembla brillant un dijous a les onze de la nit
-sovint no sobreviu al cap de tres setmanes, i millor descobrir-ho abans de
-publicar-ho que després.
+Pot ser que un mes n'hi hagi tres i que el següent no n'hi hagi cap. Això no
+és deixadesa: és la condició. El que decideix que un número surti no és la
+data, és que la idea hagi aguantat. El que sembla brillant un dijous a les
+onze de la nit sovint no sobreviu tres setmanes després, i és millor
+descobrir-ho abans de publicar-ho que després.
 
 :::destacat
-Un mes és prou temps perquè una idea es refredi. El que no sobrevisqui al
-refredament, probablement no valia la pena.
+Publicar per calendari acaba sent omplir pàgines. Un número surt quan la
+idea ha aguantat el refredament, i no abans.
 :::
 
 ## De què tracta
@@ -78,8 +80,8 @@ la de les llengües.
 ## Tres llengües, sense promeses
 
 El quadern està muntat en català, castellà i anglès, però **cada número
-decideix on existeix**. Traduir-ho tot cada mes seria triplicar la feina que
-menys m'aporta, i el resultat previsible és deixar d'escriure.
+decideix on existeix**. Traduir-ho tot seria triplicar la feina que menys
+m'aporta, i el resultat previsible és deixar d'escriure.
 
 Així que la regla és aquesta: escric en la llengua que em surti per al tema,
 i tradueixo el que crec que val la pena traduir. Si arribes a un número que

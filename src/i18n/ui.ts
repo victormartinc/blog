@@ -21,9 +21,9 @@ export const LLENGUA_INFO: Record<Llengua, { curt: string; nom: string; bcp47: s
 
 const ca = {
   "lloc.nom": "Víctor Martín",
-  "lloc.lema": "Quadern mensual de tecnologia",
+  "lloc.lema": "Quadern de tecnologia",
   "lloc.descripcio":
-    "Notes al marge sobre programari, sistemes i IA aplicada. Un número al mes, escrit per Víctor Martín Castilla des de Manresa.",
+    "Notes al marge sobre programari, sistemes i IA aplicada. Números sense periodicitat fixa, escrits per Víctor Martín Castilla des de Manresa.",
 
   "a11y.saltar": "Salta al contingut",
   "a11y.tema": "Canvia el tema",
@@ -33,10 +33,13 @@ const ca = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  "bandera.desde": "des de",
+  /* A la bandera d'una revista aquest és el lloc on va la periodicitat
+     («Mensual», «Trimestral»). Aquí diu que no n'hi ha: és la informació
+     que el lector busca en aquell punt, i és honesta. */
+  "bandera.periodicitat": "sense periodicitat fixa",
   "bandera.lloc": "Manresa, Catalunya",
-  "bandera.unNumero": "1 número",
-  "bandera.nNumeros": "{n} números",
+  "bandera.unNumero": "1 número des de {data}",
+  "bandera.nNumeros": "{n} números des de {data}",
 
   "portada.ultim": "últim número",
   "portada.hemeroteca": "hemeroteca",
@@ -84,9 +87,9 @@ const ca = {
 
 const es: Record<keyof typeof ca, string> = {
   "lloc.nom": "Víctor Martín",
-  "lloc.lema": "Cuaderno mensual de tecnología",
+  "lloc.lema": "Cuaderno de tecnología",
   "lloc.descripcio":
-    "Notas al margen sobre software, sistemas e IA aplicada. Un número al mes, escrito por Víctor Martín Castilla desde Manresa.",
+    "Notas al margen sobre software, sistemas e IA aplicada. Números sin periodicidad fija, escritos por Víctor Martín Castilla desde Manresa.",
 
   "a11y.saltar": "Saltar al contenido",
   "a11y.tema": "Cambiar el tema",
@@ -96,10 +99,10 @@ const es: Record<keyof typeof ca, string> = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  "bandera.desde": "desde",
+  "bandera.periodicitat": "sin periodicidad fija",
   "bandera.lloc": "Manresa, Cataluña",
-  "bandera.unNumero": "1 número",
-  "bandera.nNumeros": "{n} números",
+  "bandera.unNumero": "1 número desde {data}",
+  "bandera.nNumeros": "{n} números desde {data}",
 
   "portada.ultim": "último número",
   "portada.hemeroteca": "hemeroteca",
@@ -147,9 +150,9 @@ const es: Record<keyof typeof ca, string> = {
 
 const en: Record<keyof typeof ca, string> = {
   "lloc.nom": "Víctor Martín",
-  "lloc.lema": "A monthly notebook on technology",
+  "lloc.lema": "A notebook on technology",
   "lloc.descripcio":
-    "Notes in the margin on software, systems and applied AI. One issue a month, written by Víctor Martín Castilla from Manresa.",
+    "Notes in the margin on software, systems and applied AI. Issues on no fixed schedule, written by Víctor Martín Castilla from Manresa.",
 
   "a11y.saltar": "Skip to content",
   "a11y.tema": "Toggle theme",
@@ -159,10 +162,10 @@ const en: Record<keyof typeof ca, string> = {
   "nav.portfolio": "victormartinc.com",
   "nav.feed": "RSS",
 
-  "bandera.desde": "since",
+  "bandera.periodicitat": "no fixed schedule",
   "bandera.lloc": "Manresa, Catalonia",
-  "bandera.unNumero": "1 issue",
-  "bandera.nNumeros": "{n} issues",
+  "bandera.unNumero": "1 issue since {data}",
+  "bandera.nNumeros": "{n} issues since {data}",
 
   "portada.ultim": "latest issue",
   "portada.hemeroteca": "back issues",

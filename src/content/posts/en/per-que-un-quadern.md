@@ -1,7 +1,7 @@
 ---
 title: "Why a notebook"
 subtitle: "Notes in the margin of work that moves too fast"
-description: "I'm opening a monthly notebook to write down the decisions that normally stay in my head. What goes in it, how often, and why in three languages."
+description: "I'm opening a notebook to write down the decisions that normally stay in my head. What goes in it, why there's no schedule, and why in three languages."
 date: 2026-07-29
 tags: ["meta", "writing", "engineering"]
 ---
@@ -16,25 +16,26 @@ This notebook is an attempt to write it down.
 
 :::marge
 The idea isn't new — it's the old engineering notebook. What I'm adding is
-the cadence, which for me is what makes it survive.
+taking the calendar off its back, which for me is what makes it survive.
 :::
 
-## One issue a month, and that's it
+## No schedule
 
-Writing often would go badly for me. I've tried, and the predictable outcome
-is half-finished notes published to keep a streak alive. So the unit here
-isn't the post: it's the **issue**. One a month, numbered and dated, like a
-small magazine.
+Writing to a schedule would go badly for me. I've tried, and the predictable
+outcome is half-finished notes published to keep a streak alive. So there's
+no cadence here: the unit isn't the week or the month, it's the **issue**.
+Numbered and dated, like a small magazine that comes out when it has
+something to say.
 
-The constraint does two things. The first is obvious: it forces you to have
-something to say. The second is less obvious and matters more to me — a month
-is long enough for an idea to cool down. What looks brilliant on a Thursday
-at eleven at night often doesn't survive three weeks, and it's better to find
-that out before publishing than after.
+One month there may be three; the next, none at all. That isn't neglect —
+it's the condition. What decides that an issue ships isn't the date, it's
+that the idea held up. What looks brilliant on a Thursday at eleven at night
+often doesn't survive three weeks, and it's better to find that out before
+publishing than after.
 
 :::destacat
-A month is long enough for an idea to cool down. Whatever doesn't survive the
-cooling probably wasn't worth it.
+Publishing to a calendar ends up as filling pages. An issue ships once the
+idea has survived the cooling, and not before.
 :::
 
 ## What it's about
@@ -78,9 +79,9 @@ most debatable one is about languages.
 ## Three languages, no promises
 
 The notebook is set up in Catalan, Spanish and English, but **each issue
-decides where it exists**. Translating everything every month would triple
-the part of the work that gives me the least, and the predictable outcome is
-that I stop writing.
+decides where it exists**. Translating everything would triple the part of
+the work that gives me the least, and the predictable outcome is that I stop
+writing.
 
 So the rule is this: I write in whichever language fits the topic, and I
 translate what I think is worth translating. If you land on an issue that

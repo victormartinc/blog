@@ -1,8 +1,8 @@
 # Blog de Víctor Martín — instruccions per a Claude
 
-Blog personal de tecnologia. Astro + Markdown, sortida estàtica, un número al
-mes. La visió general és al [README.md](README.md); aquí hi ha el que cal
-saber per treballar-hi sense trencar res.
+Blog personal de tecnologia. Astro + Markdown, sortida estàtica, números
+sense periodicitat fixa. La visió general és al [README.md](README.md); aquí
+hi ha el que cal saber per treballar-hi sense trencar res.
 
 ## Servidor de desenvolupament
 
@@ -18,11 +18,17 @@ detecta els errors de `getStaticPaths`, que només surten al build.
 
 ## La metàfora, i per què importa
 
-El blog es presenta com una **revista mensual**. Cada article és un *número*.
-Això no és només copy: condiciona components (`Segell`, `Portada`, `Colofo`),
-el vocabulari de la interfície (*número*, *hemeroteca*) i les decisions de
+El blog es presenta com una **revista**. Cada article és un *número*. Això no
+és només copy: condiciona components (`Segell`, `Portada`, `Colofo`), el
+vocabulari de la interfície (*número*, *hemeroteca*) i les decisions de
 disseny. Si afegeixes alguna cosa, que hi encaixi — un element que sembli
 d'un SaaS desentona immediatament.
+
+**No hi ha periodicitat, i és deliberat.** Poden sortir tres números en un
+mes i cap el següent. Res del codi ni dels textos ha de prometre una
+cadència: la bandera de la portada ho diu explícitament
+(`bandera.periodicitat`), que és on una revista posaria «Mensual». Si algun
+dia hi tornes a escriure «mensual» en algun lloc, és un error.
 
 El nom públic és simplement **Víctor Martín**, amb el lema fent de subtítol.
 Viu a la clau `lloc.nom` de `src/i18n/ui.ts` i enlloc més: la capçalera, el

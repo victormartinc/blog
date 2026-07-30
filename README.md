@@ -1,15 +1,16 @@
 # Blog de Víctor Martín
 
-> Quadern mensual de tecnologia de Víctor Martín Castilla.
+> Quadern de tecnologia de Víctor Martín Castilla.
 > **[blog.victormartinc.com](https://blog.victormartinc.com)**
 
 Germà petit del [portfolio](https://victormartinc.com): mateix paper, mateixa
 tinta, mateixes tres tipografies. On el portfolio és una targeta de visita,
-això és una revista — un número al mes, numerat i datat.
+això és una revista — números numerats i datats, sense periodicitat fixa.
 
-La metàfora no és decorativa: com que la publicació és mensual, cada article
-**és un número**. El disseny hi juga a favor (capçalera de diari, capitular,
-notes al marge, colofó) en comptes de disculpar-se per la cadència lenta.
+La metàfora no és decorativa: **cada article és un número**, i un número surt
+quan està llest. Pot ser que un mes n'hi hagi tres i el següent cap. El
+disseny hi juga a favor (capçalera de diari, capitular, notes al marge,
+colofó) en comptes de fingir una cadència que no hi és.
 
 ## Stack
 
