@@ -172,7 +172,7 @@ Al davant hi ha **Caddy** com a reverse-proxy, a la xarxa Docker `web`.
 
 Aquest repo és **públic**, i per això no documenta el servidor concret: no hi
 posis rutes, IP ni ordres d'alta de domini. Tot això viu al propi servidor
-(`~/personal/README.md` i `~/docs/`), que és qui n'ha de ser l'autoritat.
+(`/srv/CLAUDE.md` de prod-01), que és qui n'ha de ser l'autoritat.
 Aquí només hi va com s'executa el blog.
 
 ## Documentació d'Astro

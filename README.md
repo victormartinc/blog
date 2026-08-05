@@ -103,5 +103,5 @@ No es desplega des d'aquí. El runbook complet és a
 [deploy/README.md](deploy/README.md); en curt, al VPS:
 
 ```bash
-cd ~/personal/blog && git pull && docker compose -f compose.prod.yml up -d --build
+cd /srv/personal/blog && git pull && docker compose -f compose.prod.yml up -d --build
 ```

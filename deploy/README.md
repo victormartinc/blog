@@ -6,7 +6,7 @@ acaba el TLS i hi arriba pel nom del contenidor (`blog`).
 
 Aquest fitxer descriu com s'executa el blog. Els detalls del servidor
 concret —rutes, ordres d'alta del domini, estat dels certificats— viuen al
-propi servidor, no aquí: `~/personal/README.md` i `~/docs/`.
+propi servidor, no aquí: `/srv/CLAUDE.md` del servidor (prod-01).
 
 ## Peces
 
