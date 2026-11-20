@@ -19,6 +19,7 @@ RUN npm run build
 # ---------- etapa 2: servidor ----------
 FROM nginx:1.28-alpine
 COPY deploy/nginx/container.conf /etc/nginx/conf.d/default.conf
+COPY deploy/nginx/csp.inc /etc/nginx/conf.d/csp.inc
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Sin comentarios HTML en lo que se publica (2026-11-20, auditoría de seguridad H13): en
