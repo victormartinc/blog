@@ -17,6 +17,12 @@ services:
     image: blog:latest
     container_name: blog
     restart: unless-stopped
+    # Límites (2026-11-20, auditoría de seguridad H3-D): una web atacada o desbocada
+    # se queda en su caja. Valores por clase en infra/servers/limites.sh.
+    mem_limit: 128m
+    memswap_limit: 128m
+    cpus: 1
+    pids_limit: 64
     networks: [web]
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ > /dev/null || exit 1"]
